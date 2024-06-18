@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/CSS/style_voluntario.css">
+    <title> Conexões Solídarias - Formulário voluntário </title>
+</head>
+<body>
+    <div class="conteudo_principal">
+        <div class="titulo_logo">
+            <div>
+                <img src="/backend/img/logo.png" alt="logo do site">
+            </div>
+            <h2> Cadastro </h2>
+        </div>
+        <div class="cadastro">
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div class="entradas">
+                    <label for="habilidades">Habilidades:</label>
+                    <input type="text" name="habilidades" id="habilidades" placeholder="Escreva habilidades técnicas, habilidades interpessoais e habilidades linguísticas">
+                </div>
+                <div class="entradas">
+                    <label for="interesses">Interesses:</label>
+                    <div>
+                        <input type="radio" name="causas_socias" id="interesses" value="causas_socias">
+                        <label for="interesses">Causas socias</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="meio_ambiente" id="interesses" value="meio_ambiente">
+                        <label for="interesses">Meio Ambiente</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="esportes_recreacao" id="interesses" value="esportes_recreacao">
+                        <label for="interesses">Esportes e recreação</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="arte_cultura" id="interesses" value="arte_cultura">
+                        <label for="interesses">Arte e cultura</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="animais" id="interesses" value="animais">
+                        <label for="interesses">Animais</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tecnologia_inovacao" id="interesses" value="tecnologia_inovacao">
+                        <label for="interesses">Tecnologia e inovação</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="Desenvolvimento comunitario" id="interesses" value="desenvolvimento_comunitario">
+                        <label for="interesses">Desenvolvimento comunitário</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="interesses" id="interesses" value="saude_bem_estar">
+                        <label for="interesses">Saúde e bem-estar</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="educacao" id="interesses" value="educacao">
+                        <label for="interesses">Educação</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="assistencia_social" id="interesses" value="assistencia_social">
+                        <label for="interesses">Assistência social</label>
+                    </div>
+                </div>
+                <div class="entradas">
+                    <label for="nivel_experiencia">Nível de experiência:</label>
+                    <input type="text" name="nivel_experiencia" id="nivel_experiencia" placeholder="Caso já tenha participado de algum trabalho voluntário (Opcional)">
+                </div>
+                <div class="entradas">
+                    <label for="imagem_perfil">Imagem de perfil:</label>
+                    <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*" onchange="previewImage(event)">
+                    <img id="visualisacao_imagem" src="#" alt="Imagem selecionada">
+                </div>
+                <button type="submit" id="confirmar">Confirmar</button>
+            </form>
+        </div>
+    </div>
+    <script src="/frontend/JavaScript/cadastro-voluntario2.js"></script>
+</body>
+</html>

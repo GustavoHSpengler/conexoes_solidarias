@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --cor_de_fundo: rgba(193, 255, 114, 1);
+    --cor_do_con-prin: rgba(208, 255, 148, 1);
+    --cor_do_botao: rgba(193, 255, 114, 1);
+}
+
+body {
+    background-color: var(--cor_de_fundo);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.conteudo_principal {
+    background-color: var(--cor_do_con-prin);
+    height: 750px;
+    width: 720px;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo_logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 5px;
+    padding: 2vh;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    img {
+        height: 90px;
+        width: 90px;
+    }
+    h2 {
+        font-size: 2.5em;
+        font-family: 'Inknut Antiqua', sans-serif;
+    }
+    button {
+        background-color: var(--cor_do_botao);
+        border: none;
+        width: 102px;
+        height: 42px;
+        font-size: 1em;
+        font-family: 'Inknut Antiqua', sans-serif;
+    }
+}
+
+.tipos_cadastro {
+    display: flex;
+    flex-direction: column;
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    h1 {
+        align-self: center;
+        font-size: 2.9em;
+        font-family: 'Inknut Antiqua', sans-serif;
+    }
+    button {
+        align-self: center;
+        background-color: var(--cor_do_botao);
+        margin-top: 6vh;
+        border: none;
+        border-radius: 25px;
+        height: 12vh;
+        width: 27vw;
+        font-size: 1.7em;
+        font-family: 'Inknut Antiqua', sans-serif;
+    }
+}
+
+.escolha {
+    cursor: pointer;
+    transition: 
+        scale 0.25s ease-in, 
+        opacity 0.25s ease-in, 
+        filter 0.25s ease-in;
+    &:hover {
+        scale: 1.2;
+    }
+}
+
+button:has(.escolha:hover) .escolha:not(hover) {
+    scale: 0.8; 
+    opacity: 0.8; 
+    filter: blur(4px);
+}

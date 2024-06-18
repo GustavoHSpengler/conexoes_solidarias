@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontend/CSS/style_voluntario.css">
+    <title> Conexões Solídarias - Formulário voluntário  </title>
+</head>
+<body>
+    <div class="conteudo_principal">
+        <div class="titulo_logo">
+            <div>
+                <img src="/backend/img/logo.png" alt="logo do site">
+            </div>
+            <h2> Cadastro </h2>
+        </div>
+        <div class="cadastro">
+            <form action="#">
+                <div class="entradas">
+                    <label for="cpf"> CPF: </label>
+                    <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required>
+                </div>
+                <div class="entradas">
+                    <label for="nome"> Nome: </label>
+                    <input type="text" name="nome" id="nome" placeholder="Nome Sobrenome" required>
+                </div>
+                <div class="entradas">
+                    <label for="email"> Email: </label>
+                    <input type="email" name="email" id="email" placeholder="nome@email.com" required>
+                </div>
+                <div class="entradas">
+                    <label for="senha"> Senha: </label>
+                    <input type="password" name="senha" id="senha" placeholder="*****" required>
+                </div>
+                <div class="entradas">
+                    <label for="confirmar_senha"> Confirmar senha: </label>
+                    <input type="password" name="confirmar_senha" id="confirmar_senha" placeholder="Repita a senha que colocou no tópico anterior" required>
+                </div>
+                <div class="entradas">
+                    <label for="telefone"> Telefone: </label>
+                    <input type="tel" name="telefone" id="telefone" placeholder="(51)99000-0000" required>
+                </div>
+                <div class="entradas">
+                    <label for="data_nascimento"> Data de nascimento: </label>
+                    <input type="date" name="data_nascimento" id="data_nascimento" required>
+                </div>
+                <div class="entradas">
+                    <label for="endereço"> Endereço: </label>
+                    <input type="text" name="endereco" id="endereco" placeholder="Rua/Avenida, Nº da casa, cidade." required>
+                </div>
+                <button type="button" id="continuar">  Continuar </button>
+            </form>
+        </div>
+    </div>
+    <script src="/frontend/JavaScript/cadastro-voluntarios1.js"></script>
+</body>
+</html>

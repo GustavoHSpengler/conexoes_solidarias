@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor_de_fundo: rgba(193, 255, 114, 1);
+    --cor_do_con-prin: rgba(208, 255, 148, 1);
+    --cor_do_botao: rgba(193, 255, 114, 1);
+}
+
+body {
+    background-color: var(--cor_de_fundo);
+    height: 150vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.conteudo_principal {
+    background-color: var(--cor_do_con-prin);
+    height: 145vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo_logo {
+    display: flex;
+    align-items: center;
+    margin-right: 5em;
+    padding: 2vh;
+    img {
+        height: 12vh;
+        width: 6.25vw;
+    }
+    h2 {
+        margin-left: 2.5em;
+        font-size: 2.5em;
+        font-family: 'Inknut Antiqua', serif;
+        font-style: normal;
+        line-height: 103px;
+        color: #000000;
+    }
+    a {
+        text-decoration: none;
+        color: #000000;
+    }
+    .Voltar {
+        margin-left: 7em;
+        font-size: 1em;
+        width: 102px;
+        height: 42px;
+        border: none;
+        background-color: var(--cor_do_botao);
+    }
+}
+
+.cadastro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .entradas {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 531px;
+        font-size: 24px;
+        input {
+            height: 24px;
+            padding: 0% 3%;
+            border-radius: 25px;
+            border: 1px solid black;
+        }
+        img {
+            display: none;
+            max-width: 300px;
+        }
+    }
+}
+
+#confirmar {
+    gap: 100px;
+    align-self: center;
+}
