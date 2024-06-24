@@ -2,7 +2,7 @@ const connection = require('../config/db');
 const mysql = require('../config/db');
 const dotenv = require('dotenv').config();
 
-async function store(request, response) {
+async function storeVoluntario(request, response) {
     const params = Array(
         request.body.usuario_cpf,
         request.body.nome,
@@ -40,5 +40,5 @@ async function store(request, response) {
 }
 
 module.exports = {
-    store
+    storeVoluntario
 }

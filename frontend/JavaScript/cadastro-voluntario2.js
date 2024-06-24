@@ -16,7 +16,9 @@ function previewImage(event) {
     }
 }
 
-confirmar.onclick = async function() {
+confirmar.onclick = async function handleRegister(event) {
+    event.preventDefault();
+
     let dados = localStorage.getItem("dados");
     let habilidades = document.getElementById("habilidades").value;
     let interesses = document.getElementById("interesses").value;
