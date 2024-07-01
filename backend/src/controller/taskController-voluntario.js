@@ -19,6 +19,7 @@ async function storeVoluntario(request, response) {
 
     const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     connection.query(query, params, (err, results) => {
+        console.log(err, results);
         if (results){
             response
                 .status(201)
