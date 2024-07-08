@@ -1,9 +1,8 @@
 const connection = require('../config/db');
-const mysql = require('../config/db');
 const dotenv = require('dotenv').config();
 
 async function storeVoluntario(request, response) {
-    const params = Array(
+    const params = [
         request.body.usuario_cpf,
         request.body.nome,
         request.body.email,
@@ -15,31 +14,31 @@ async function storeVoluntario(request, response) {
         request.body.interesses,
         request.body.nivel_experiencia,
         request.body.img_conta
-    );
+    ];
 
-    const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     connection.query(query, params, (err, results) => {
         console.log(err, results);
-        if (results){
+        if (results) {
             response
                 .status(201)
                 .json({
-                    sucess: true,
+                    success: true,
                     message: "Sucesso!", 
                     data: results
-                })
-        }   else {
+                });
+        } else {
             response
                 .status(400)
                 .json({
-                    sucess: false,
+                    success: false,
                     message: "Putz!", 
                     sql: err
-                })
+                });
         }
     });
 }
 
 module.exports = {
     storeVoluntario
-}
+};

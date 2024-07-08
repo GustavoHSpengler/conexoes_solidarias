@@ -21,13 +21,12 @@ confirmar.onclick = async function (event) {
 
     let dados = JSON.parse(localStorage.getItem("dados"));
     let usuario_cpf = dados.usuario_cpf;
-    let nome        = dados.nome;
-    let email        = dados.nome;
-    let senha        = dados.nome;
-    let telefone     = dados.nome;
-    let data_nascimento = dados.nome;
-    let endereco     = dados.nome;
-    
+    let nome = dados.nome;
+    let email = dados.email;  
+    let senha = dados.senha;  
+    let telefone = dados.telefone;
+    let data_nascimento = dados.data_nascimento; 
+    let endereco = dados.endereco; 
     let habilidades = document.getElementById("habilidades").value;
     let interesses = document.querySelector('input[name="interesses"]:checked').value;
     let nivel_experiencia = document.getElementById("nivel_experiencia").value;
@@ -50,13 +49,14 @@ confirmar.onclick = async function (event) {
         conteudo.append("interesses", interesses);
         conteudo.append("nivel_experiencia", nivel_experiencia);
         conteudo.append("imagem_perfil", imagem_perfil);
-        
-        
+        for (var data of conteudo) {
+            console.log(data);
+          }
+
         try {
-            const response = await fetch("http://localhost:3025/api/storeVoluntario/task", {
+            const response = await fetch('http://localhost:3025/api/storeVoluntario/task', {
                 method: "POST",
-                headers: {"Content-type": "applications/json;charset=UTF-8"},
-                body: JSON.stringify(conteudo)
+                body: conteudo
             });
 
             let content = await response.json();
