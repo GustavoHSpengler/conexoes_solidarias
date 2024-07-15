@@ -49,14 +49,15 @@ confirmar.onclick = async function (event) {
         conteudo.append("interesses", interesses);
         conteudo.append("nivel_experiencia", nivel_experiencia);
         conteudo.append("imagem_perfil", imagem_perfil);
-        for (var data of conteudo) {
-            console.log(data);
-          }
+        
+        console.log(conteudo);
+        
 
         try {
-            const response = await fetch('http://localhost:3025/api/storeVoluntario/task', {
+            const response = await fetch('http://localhost:3005/api/storeVoluntario/task', {
                 method: "POST",
-                body: conteudo
+                headers: {"Content-type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(conteudo)
             });
 
             let content = await response.json();

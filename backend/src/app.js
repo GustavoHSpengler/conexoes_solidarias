@@ -5,15 +5,10 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(express.json()); // Parse JSON bodies
+app.set("port", process.env.PORT || 3306);
+app.use(express.json()); 
 app.use(cors());
 
-app.set("port", process.env.PORT || 3025);
 app.use("/api", taskRouter_voluntario);
-
-app.listen(app.get("port"), () => {
-    console.log(`Server running on port ${app.get("port")}`);
-});
 
 module.exports = app;
