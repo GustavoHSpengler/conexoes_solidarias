@@ -2,7 +2,10 @@ const connection = require('../config/db');
 const dotenv = require('dotenv').config();
 
 async function storeVoluntario(request, response) {
-    const params = [
+
+    console.log(request.body);
+    
+    const params = Array(
         request.body.usuario_cpf,
         request.body.nome,
         request.body.email,
@@ -13,8 +16,8 @@ async function storeVoluntario(request, response) {
         request.body.habilidades,
         request.body.interesses,
         request.body.nivel_experiencia,
-        request.body.img_conta
-    ];
+        request.body.imagem_perfil
+    );
 
     console.log(params);
 

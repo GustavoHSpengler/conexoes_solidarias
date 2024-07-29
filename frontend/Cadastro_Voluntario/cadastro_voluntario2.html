@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/CSS/style_voluntario.css">
+    <link rel="stylesheet" href="/frontend/Cadastro_Voluntario/style_voluntario.css">
     <title> Conexões Solídarias - Formulário voluntário </title>
 </head>
 <body>
@@ -15,7 +15,7 @@
             <h2> Cadastro </h2>
         </div>
         <div class="cadastro">
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#">
                 <div class="entradas">
                     <label for="habilidades">Habilidades:</label>
                     <input type="text" name="habilidades" id="habilidades" placeholder="Escreva habilidades técnicas, habilidades interpessoais e habilidades linguísticas" required>
@@ -72,10 +72,10 @@
                     <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*" onchange="previewImage(event)" required>
                     <img id="visualisacao_imagem" src="#" alt="Imagem selecionada">
                 </div>
-                <button type="submit" id="confirmar">Confirmar</button>
+                <button type="button" onclick="sendData(event)" id="confirmar">Confirmar</button>
             </form>
         </div>
     </div>
-    <script src="/frontend/JavaScript/cadastro-voluntario2.js"></script>
+    <script src="/frontend/Cadastro_Voluntario/cadastro-voluntario2.js"></script>
 </body>
 </html>
