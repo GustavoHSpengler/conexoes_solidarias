@@ -68,8 +68,8 @@
                     <input type="text" name="nivel_experiencia" id="nivel_experiencia" placeholder="Caso já tenha participado de algum trabalho voluntário (Opcional)">
                 </div>
                 <div class="entradas">
-                    <label for="imagem_perfil">Imagem de perfil:</label>
-                    <input type="file" name="imagem_perfil" id="imagem_perfil" accept="image/*" onchange="previewImage(event)" required>
+                    <label for="img_conta">Imagem de perfil:</label>
+                    <input type="file" name="img_conta" id="img_conta" accept="image/*" ng-model="img_conta" onchange="previewImage(event)" required>
                     <img id="visualisacao_imagem" src="#" alt="Imagem selecionada">
                 </div>
                 <button type="button" onclick="sendData(event)" id="confirmar">Confirmar</button>

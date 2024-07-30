@@ -15,7 +15,7 @@ async function sendData(event) {
     fm.append("habilidades", document.getElementById("habilidades").value)
     fm.append("interesses", document.querySelector('input[name="interesses"]:checked').value);
     fm.append("nivel_experiencia", document.getElementById("nivel_experiencia").value)
-    fm.append("imagem_perfil", document.getElementById("imagem_perfil").files[0])
+    fm.append("img_conta", document.getElementById("img_conta").files[0])
 
     for (const data of fm.entries()) {
         console.log(`${data[0]} = ${data[1]}`); 
