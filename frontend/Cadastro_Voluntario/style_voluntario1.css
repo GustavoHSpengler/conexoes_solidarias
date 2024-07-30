@@ -34,7 +34,7 @@ body {
 .titulo_logo {
     display: flex;
     align-items: center;
-    padding: 2vh;
+    padding: 14px;
 }
 
 .titulo_logo img {

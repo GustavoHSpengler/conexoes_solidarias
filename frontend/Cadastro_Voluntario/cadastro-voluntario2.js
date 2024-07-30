@@ -3,28 +3,34 @@ async function sendData(event) {
     
     let data = JSON.parse(localStorage.getItem("dados"));
 
-    let fm = new FormData();
+    let conteudo = new FormData();
 
-    fm.append("usuario_cpf", data.usuario_cpf)
-    fm.append("nome", data.nome)
-    fm.append("email", data.email)
-    fm.append("senha", data.senha)
-    fm.append("data_nascimento", data.data_nascimento)
-    fm.append("telefone", data.telefone)
-    fm.append("endereco", data.endereco)
-    fm.append("habilidades", document.getElementById("habilidades").value)
-    fm.append("interesses", document.querySelector('input[name="interesses"]:checked').value);
-    fm.append("nivel_experiencia", document.getElementById("nivel_experiencia").value)
-    fm.append("img_conta", document.getElementById("img_conta").files[0])
+    conteudo.append("usuario_cpf", data.usuario_cpf);
+    conteudo.append("nome", data.nome);
+    conteudo.append("email", data.email);
+    conteudo.append("senha", data.senha);
+    conteudo.append("data_nascimento", data.data_nascimento);
+    conteudo.append("telefone", data.telefone);
+    conteudo.append("endereco", data.endereco);
+    conteudo.append("habilidades", document.getElementById("habilidades").value);
+    conteudo.append("interesses", document.getElementById("interesses").value);
+    conteudo.append("nivel_experiencia", document.getElementById("nivel_experiencia").value);
 
-    for (const data of fm.entries()) {
-        console.log(`${data[0]} = ${data[1]}`); 
+    const fileInput = document.getElementById("img_conta");
+    if (fileInput.files[0]) {
+        const fileName = fileInput.files[0].name;
+        conteudo.append("img_conta", fileName);
     }
-    console.log(fm)
+
+    if (!habilidades || !interesses || !img_conta) {
+        alert("Todos os campos precisam ser preenchidos!");
+        return
+    } 
+    
+
     const formDataObj = {};
-    fm.forEach((value, key) => (formDataObj[key] = value));
-    console.log(formDataObj)
-    console.log(JSON.stringify(formDataObj))
+    conteudo.forEach((value, key) => (formDataObj[key] = value));
+    console.log(JSON.stringify(formDataObj));
 
     try {
         const response = await fetch('http://localhost:3005/api/storeVoluntario/task', {
@@ -35,26 +41,22 @@ async function sendData(event) {
             body: JSON.stringify(formDataObj)
         });
         
-        // let content = await response.json();
-        
-        // if (content.success) {
-        //     window.location.pathname = "..frontend/Pagina_Inicial/pagina_inicial.html";
-        // } else {        
-        //     alert("Deu algo errado!");       
-        // }
+        let content = await response.json();
+
+        if (content.success) {
+           window.location.pathname = "/frontend/Pagina_Inicial/pagina_inicial.html";
+        } else {        
+           alert("Deu algo errado!");       
+        }
     } catch (error) {
         console.error("Erro: ", error);
         alert("Deu algo errado!");
     }
-    
 }
-
-
-// let confirmar = document.getElementById("confirmar");
 
 function previewImage(event) {
     let input = event.target;
-    let visualizacao = document.getElementById('visualisacao_imagem');
+    let visualizacao = document.getElementById('visualizacao_imagem');
 
     if (input.files && input.files[0]) {
         let visualizador = new FileReader();

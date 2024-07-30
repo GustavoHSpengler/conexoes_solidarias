@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/frontend/Cadastro_Voluntario/style_voluntario.css">
-    <title> Conexões Solídarias - Formulário voluntário </title>
+    <link rel="stylesheet" href="/frontend/Cadastro_Voluntario/style_voluntario2.css">
+    <title> Conexões Solidárias - Formulário Voluntário </title>
 </head>
 <body>
     <div class="conteudo_principal">
@@ -15,62 +15,35 @@
             <h2> Cadastro </h2>
         </div>
         <div class="cadastro">
-            <form action="#">
+            <form action="#" id="formCadastro">
                 <div class="entradas">
                     <label for="habilidades">Habilidades:</label>
-                    <input type="text" name="habilidades" id="habilidades" placeholder="Escreva habilidades técnicas, habilidades interpessoais e habilidades linguísticas" required>
+                    <textarea name="habilidades" id="habilidades" placeholder="Escreva habilidades técnicas, habilidades interpessoais e habilidades linguísticas" required></textarea>
                 </div>
                 <div class="entradas">
                     <label for="interesses">Interesses:</label>
-                    <div>
-                        <input type="radio" name="interesses" id="causas_socias" value="Causas Socias">
-                        <label for="causas_socias">Causas socias</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="meio_ambiente" value="Meio Ambiente">
-                        <label for="meio_ambiente">Meio Ambiente</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="esportes_recreacao" value="Esportes e Recreação">
-                        <label for="esportes_recreacao">Esportes e recreação</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="arte_cultura" value="Arte e Cultura">
-                        <label for="arte_cultura">Arte e cultura</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="animais" value="Animais">
-                        <label for="animais">Animais</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="tecnologia_inovacao" value="Tecnologia e Inovação">
-                        <label for="tecnologia_inovacao">Tecnologia e inovação</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="desenvolvimento_comunitario" value="Desenvolvimento Comunitário">
-                        <label for="desenvolvimento_comunitario">Desenvolvimento comunitário</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="saude_bem_estar" value="Saúde e Bem-Estar">
-                        <label for="saude_bem_estar">Saúde e bem-estar</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="educacao" value="Educação">
-                        <label for="educacao">Educação</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="interesses" id="assistencia_social" value="Assistência Social">
-                        <label for="assistencia_social">Assistência social</label>
-                    </div>
+                    <select name="interesses" id="interesses" required>
+                        <option value="" disabled selected>Selecione seus interesses</option>
+                        <option value="Causas Sociais">Causas Sociais</option>
+                        <option value="Meio Ambiente">Meio Ambiente</option>
+                        <option value="Esportes e Recreação">Esportes e Recreação</option>
+                        <option value="Arte e Cultura">Arte e Cultura</option>
+                        <option value="Animais">Animais</option>
+                        <option value="Tecnologia e Inovação">Tecnologia e Inovação</option>
+                        <option value="Desenvolvimento Comunitário">Desenvolvimento Comunitário</option>
+                        <option value="Saúde e Bem-Estar">Saúde e Bem-Estar</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Assistência Social">Assistência Social</option>
+                    </select>
                 </div>                
                 <div class="entradas">
                     <label for="nivel_experiencia">Nível de experiência:</label>
-                    <input type="text" name="nivel_experiencia" id="nivel_experiencia" placeholder="Caso já tenha participado de algum trabalho voluntário (Opcional)">
+                    <textarea name="nivel_experiencia" id="nivel_experiencia" placeholder="Caso já tenha participado de algum trabalho voluntário (Opcional)"></textarea>
                 </div>
                 <div class="entradas">
                     <label for="img_conta">Imagem de perfil:</label>
-                    <input type="file" name="img_conta" id="img_conta" accept="image/*" ng-model="img_conta" onchange="previewImage(event)" required>
-                    <img id="visualisacao_imagem" src="#" alt="Imagem selecionada">
+                    <input type="file" name="img_conta" id="img_conta" accept="image/*" onchange="previewImage(event)" required>
+                    <img id="visualizacao_imagem" src="#" alt="Imagem selecionada" style="display:none;">
                 </div>
                 <button type="button" onclick="sendData(event)" id="confirmar">Confirmar</button>
             </form>
