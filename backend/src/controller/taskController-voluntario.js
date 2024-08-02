@@ -1,7 +1,8 @@
 const connection = require('../config/db');
+const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
-async function storeVoluntario(request, response) {
+async function storeVolunteers(request, response) {
 
     console.log(request.body);
     
@@ -9,7 +10,7 @@ async function storeVoluntario(request, response) {
         request.body.usuario_cpf,
         request.body.nome,
         request.body.email,
-        request.body.senha,
+        bcrypt.hashSync(request.body.senha, 10),
         request.body.telefone,
         request.body.data_nascimento,
         request.body.endereco,
@@ -37,7 +38,7 @@ async function storeVoluntario(request, response) {
                  .status(400)
                  .json({
                      success: false,
-                     message: "Putz!", 
+                     message: "Ocorreu um problema!", 
                      sql: err
                  });
          }
@@ -45,5 +46,5 @@ async function storeVoluntario(request, response) {
 }
 
 module.exports = {
-    storeVoluntario
+    storeVolunteers
 };

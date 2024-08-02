@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/backend/img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style_login.css">
+    <title> Entrar - Conexões Solídarias </title>
+</head>
+<body>
+    <div class="conteudo_principal">
+        <div class="titulo_logo">
+            <div>
+                <img src="/backend/img/logo.png" alt="logo do site">
+            </div>
+            <h2> Entrar </h2>
+        </div>
+        <div class="cadastro">
+            <form action="#">
+                <div class="entradas">
+                    <label for="email"> Email: </label>
+                    <input type="email" name="email" id="email" placeholder="Escreva o email anteriormente usado." required>
+                </div>
+                <div class="entradas">
+                    <label for="senha"> Senha: </label>
+                    <input type="password" name="senha" id="senha" placeholder="Escreva a senha anteriormente usado." required>
+                </div>
+                <button type="button" id="confirmar" onclick="recoverData(event)">  Confirmar </button>
+            </form>
+        </div>
+    </div>
+    <script src="/frontend/Entrar/login_usuario.js"> </script>
+</body>

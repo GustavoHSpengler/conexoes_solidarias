@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 
-const { storeVoluntario } = require("../controller/taskController-voluntario");
+const { storeVolunteers } = require("../controller/taskController-voluntario");
 
-router.post("/storeVoluntario/task", storeVoluntario);
+router.post("/storeVolunteers/task", storeVolunteers);
 
 module.exports = router;

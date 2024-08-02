@@ -30,10 +30,9 @@ async function sendData(event) {
 
     const formDataObj = {};
     conteudo.forEach((value, key) => (formDataObj[key] = value));
-    console.log(JSON.stringify(formDataObj));
 
     try {
-        const response = await fetch('http://localhost:3005/api/storeVoluntario/task', {
+        const response = await fetch('http://localhost:3005/api/storeVolunteers/task', {
             method: "POST",
             headers: {                
                 "Content-Type": "application/json",
@@ -44,7 +43,7 @@ async function sendData(event) {
         let content = await response.json();
 
         if (content.success) {
-           window.location.pathname = "/frontend/Pagina_Inicial/pagina_inicial.html";
+           window.location.pathname = "/frontend/Entrar/login.html";
         } else {        
            alert("Deu algo errado!");       
         }
