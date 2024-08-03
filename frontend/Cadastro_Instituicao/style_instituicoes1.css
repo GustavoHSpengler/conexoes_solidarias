@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--cor_de_fundo);
-    height: 150vh;
+    height: 130vh;
     display: flex;
     justify-content: center;
     margin-top: 50px;
@@ -24,7 +24,7 @@ body {
 
 .conteudo_principal {
     background-color: var(--cor_do_con-prin);
-    height: auto;
+    height: 1200px;
     width: 600px;
     padding: 20px;
     display: flex;
@@ -68,7 +68,7 @@ body {
     margin-bottom: 5px;
 }
 
-.entradas textarea, .entradas input, .entradas select {
+.entradas input {
     width: 500px;
     height: 50px;
     padding: 0% 3%;
@@ -87,7 +87,6 @@ body {
     font-size: 20px;
     font-weight: bold;
     transition: background-color 0.3s;
-    margin-top: 20px;
 }
 
 #continuar:hover {

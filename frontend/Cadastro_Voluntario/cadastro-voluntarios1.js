@@ -36,9 +36,8 @@ function nextStep(event) {
     } else { 
         let dados = { usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco };
         try {
-            
-    localStorage.setItem("dados", JSON.stringify(dados));
-    window.location.pathname = "/frontend/Cadastro_Voluntario/cadastro_voluntario2.html";
+            localStorage.setItem("dados", JSON.stringify(dados));
+            window.location.pathname = "/frontend/Cadastro_Voluntario/cadastro_voluntario2.html";
         } catch (error) {
             console.error("Erro ao redirecionar:", error);
             alert("Erro ao tentar prosseguir para a próxima página.");
