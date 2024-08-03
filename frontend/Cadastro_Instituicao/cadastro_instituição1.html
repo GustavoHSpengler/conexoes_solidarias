@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/backend/img/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/CSS/style2.css">
+    <link rel="stylesheet" href="/frontend/Cadastro_Instituicao/style_instituicoes.css">
     <title> Conexões Solídarias - Formulário instituição  </title>
 </head>
 <body>
@@ -18,8 +18,8 @@
         <div class="cadastro">
             <form action="#">
                 <div class="entradas">
-                    <label for="CNPJ"> CNPJ: </label>
-                    <input type="text" name="CNPJ" id="CNPJ" placeholder="92.959.006/0008-85">
+                    <label for="cnpj"> CNPJ: </label>
+                    <input type="text" name="cnpj" id="cnpj" placeholder="92.959.006/0008-85">
                 </div>
                 <div class="entradas">
                     <label for="nome"> Nome: </label>
@@ -53,7 +53,7 @@
                     <label for="area_atuacao"> Aréa de atuação: </label>
                     <input type="text" name="area_atuacao" id="area_atuacao" placeholder="Só descreva lugares no qual atua como se atua em Sapucaia, Esteio, etc.">
                 </div>
-                <button type="button" id="continuar"> <a href="/frontend/HTML/cadastro_instituição2.html"> Continuar </a> </button>
+                <button type="button" id="continuar" onclick="nextPage(event)"> Continuar </button>
             </form>
         </div>
     </div>

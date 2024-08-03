@@ -1,15 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-const taskRouter_voluntario = require("./routes/taskRouter-voluntario");
-// const taskRouter_entrar = require("./routes/taskRouter-entrar");
-const cors = require("cors");
+const cors    = require("cors");
 
 const app = express();
 
+const routerVolunteer = require("./routes/taskRouter-voluntario");
+const loginRouter = require("./routes/taskRouter-entrar");
+
+app.set("port", process.env.PORT || 3306);
 app.use(express.json()); 
 app.use(cors());
-app.set("port", process.env.PORT || 3306);
 
-app.use("/api", taskRouter_voluntario);
+app.use('/api', [
+    routerVolunteer,
+    loginRouter
+]);
 
 module.exports = app;

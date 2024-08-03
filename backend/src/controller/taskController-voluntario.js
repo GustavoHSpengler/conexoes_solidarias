@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
 async function storeVolunteers(request, response) {
-
-    console.log(request.body);
     
     const params = Array(
         request.body.usuario_cpf,
@@ -19,8 +17,6 @@ async function storeVolunteers(request, response) {
         request.body.nivel_experiencia,
         request.body.img_conta
     );
-
-    console.log(params);
 
     const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         connection.query(query, params, (err, results) => {

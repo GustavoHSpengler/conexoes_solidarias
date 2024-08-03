@@ -4,57 +4,65 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 async function storeLogin(request, response) {
-    const query = "SELECT * FROM usuarios_voluntarios WHERE email = ?";
-    
-    const params = [
-        request.body.email
-    ];
 
-    connection.query(query, params, (err, results) => {
-        if (err) {
-            return response.status(500).json({
-                success: false,
-                message: `Erro na consulta ao banco de dados`,
-                query: err.sql,
-                sqlMessage: err.sqlMessage
-            });
-        }
+    const checkLoginInTable = (tableName) => {
+        
+        return new Promise((resolve, reject) => {
+            const query = `SELECT * FROM ${tableName} WHERE email = ?`;
+            const params = [request.body.email];
 
-        if (results.length > 0) {
-            bcrypt.compare(request.body.senha, results[0].senha, (err, result) => {
-                if (err) {
-                    return response.status(401).send({
-                        success: false,
-                        message: 'Email ou senha está incorreto!'
-                    });
-                } else if (result) {
-                    const id = results[0].id; 
-                    const token = jwt.sign({ userId: id }, 'the-super-strong-secret', { expiresIn: '5m' }); 
-                    
-                    response.status(200).json({
-                        success: true,
-                        message: `Sucesso! Usuário conectado.`,
-                        data: {
-                            ...results[0],
-                            token: token
+            console.log(params)
+            connection.query(query, params, (err, results) => {
+                if (err) return reject(err);
+
+                if (results.length > 0) {
+                    bcrypt.compare(request.body.senha, results[0].senha, (err, result) => {
+                        if (err) return reject(err);
+                        if (result) {
+                            const id = results[0].id;
+                            const token = jwt.sign({ userId: id, tableName }, process.env.JWT_SECRET, { expiresIn: '5m' });
+                            
+                            return resolve({
+                                success: true,
+                                message: `Sucesso! Usuário conectado.`,
+                                data: {
+                                    ...results[0],
+                                    token: token
+                                }
+                            });
                         }
+                        reject(new Error('Email ou senha está incorreto!'));
                     });
                 } else {
-                    return response.status(401).send({
-                        success: false,
-                        message: 'Email ou senha está incorreto!'
-                    });
+                    reject(new Error('Não foi possível encontrar o usuário. Verifique o email informado.'));
                 }
             });
-        } else {
-            response.status(400).json({
-                success: false,
-                message: `Não foi possível encontrar o usuário. Verifique o email informado.`
-            });
+        });
+    };
+
+    try {
+        let responseData;
+        
+        try {
+            responseData = await checkLoginInTable('usuarios_voluntarios');
+        } catch (e) {
+            if (e.message === 'Não foi possível encontrar o usuário. Verifique o email informado.') {
+                responseData = await checkLoginInTable('usuarios_instituicoes');
+            } else {
+                throw e;
+            }
         }
-    });
+
+        response.status(200).json(responseData);
+    } catch (error) {
+        response.status(401).json({
+            success: false,
+            message: error.message
+        });
+    }
 }
 
 module.exports = {
     storeLogin
 }
+
