@@ -101,9 +101,3 @@ body {
 #continuar:hover {
     background-color: var(--cor_do_botao_hover);
 }
-
-#visualizacao_imagem {
-    max-width: 100%;
-    max-height: 200px;
-    margin-top: 10px;
-}
