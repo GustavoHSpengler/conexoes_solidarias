@@ -11,7 +11,7 @@
     <div class="conteudo_principal">
         <div class="titulo_logo">
             <div>
-                <img src="/backend/img/logo.png" alt="logo do site">
+                <img src="/backend/upload/logo.png" alt="logo do site">
             </div>
             <h2> Cadastro </h2>
         </div>
@@ -23,12 +23,12 @@
                 </div>
                 <div class="entradas">
                     <label for="img_logo"> Imagem ou logo da instituição: </label>
-                    <input type="image" name="img_logo" id="img_logo">
+                    <input type="image" name="img_logo" id="img_logo" onchange="previewImage(event)">
                 </div>
                 <button type="button" id="confirmar" onclick="sendData(event)"> <a href="/frontend/HTML/pagina_inicial.html"> Confirmar </a> </button>
             </form>
         </div>
     </div>
-    <script src="/frontend/JavaScript/main.js"></script>
+    <script src="/frontend/Cadastro_Instituicao/cadastro_instituicao3.js"></script>
 </body>
 </html>

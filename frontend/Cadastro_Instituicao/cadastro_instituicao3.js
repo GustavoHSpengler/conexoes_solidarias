@@ -1,23 +1,23 @@
 async function sendData(event) {
     event.preventDefault();
     
-    let data = JSON.parse(localStorage.getItem("data"));
+    let dados_instituicoes2 = JSON.parse(localStorage.getItem("dados_instituicoes2"));
 
     let form = document.getElementById("form");
 
     let conteudo = new FormData(form);
 
-    conteudo.append("instituicao_cnpj", data.instituicao_cnpj);
-    conteudo.append("nome", data.nome);
-    conteudo.append("email", data.email);
-    conteudo.append("senha", data.senha);
-    conteudo.append("data_nascimento", data.data_nascimento);
-    conteudo.append("telefone", data.telefone);
-    conteudo.append("endereco", data.endereco);
-    conteudo.append("area_atuacao", data.area_atuacao);
-    conteudo.append("nome_responsavel", data.nome_responsavel);
-    conteudo.append("necessidades_voluntarios", data.necessidades_voluntarios);
-    conteudo.append("requisitos_voluntarios", data.requisitos_voluntarios);
+    conteudo.append("instituicao_cnpj", dados_instituicoes2.instituicao_cnpj);
+    conteudo.append("nome", dados_instituicoes2.nome);
+    conteudo.append("email", dados_instituicoes2.email);
+    conteudo.append("senha", dados_instituicoes2.senha);
+    conteudo.append("data_nascimento", dados_instituicoes2.data_nascimento);
+    conteudo.append("telefone", dados_instituicoes2.telefone);
+    conteudo.append("endereco", dados_instituicoes2.endereco);
+    conteudo.append("area_atuacao", dados_instituicoes2.area_atuacao);
+    conteudo.append("nome_responsavel", dados_instituicoes2.nome_responsavel);
+    conteudo.append("necessidades_voluntarios", dados_instituicoes2.necessidades_voluntarios);
+    conteudo.append("requisitos_voluntarios", dados_instituicoes2.requisitos_voluntarios);
     conteudo.append("certificados_afiliacoes", document.getElementById("certificados_afiliacoes").value);
 
     const fileInput = document.getElementById("img_logo");

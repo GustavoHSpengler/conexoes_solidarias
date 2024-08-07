@@ -2,13 +2,13 @@ const connection = require('../config/db');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
-const fm = require("fs");
+const fm = require("fm");
     const path = require("path");
 
     const uploadPath = path.join(__dirname, "..", "upload")
 
-if (!fs.existSync(uploadPath)) {
-    fs.mkdirSync(uploadPath);
+if (!fm.existSync(uploadPath)) {
+    fm.mkdirSync(uploadPath);
 }
     
 async function storeInstitutions(request, response) {
