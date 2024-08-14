@@ -2,13 +2,13 @@ const connection = require('../config/db');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
-const fm = require("fm");
+const fs = require("fs");
     const path = require("path");
 
     const uploadPath = path.join(__dirname, "..", "upload")
 
-if (!fm.existSync(uploadPath)) {
-    fm.mkdirSync(uploadPath);
+if (!fs.existsSync(uploadPath)) {
+    fs.mkdirSync(uploadPath);
 }
     
 async function storeInstitutions(request, response) {
@@ -30,24 +30,23 @@ async function storeInstitutions(request, response) {
                 message: "Erro ao mover arquivo"
             })
         }
-    });
-    const params = Array(
-        request.body.instuicao_cnpj,
-        request.body.nome,
-        request.body.email,
-        bcrypt.hashSync(request.body.senha, 10),
-        request.body.telefone,
-        request.body.data_nascimento,
-        request.body.endereco,
-        request.body.area_atuacao,
-        request.body.nome_responsavel,
-        request.body.necessidades_voluntarios,
-        request.body.requisitos_voluntarios,
-        request.body.certificações_afiliacoes,
-        img_logo
-    );
 
-    const query = "INSERT INTO usuarios_instituicoes(instituicao_cnpj, nome, email, senha, telefone, data_nascimento, endereco, area_atuacao, nome_responsavel, necessidades_voluntarios, requisitos_voluntarios, certificações_afiliacoes, img_logo) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        const params = Array(
+            request.body.instuicao_cnpj,
+            request.body.nome,
+            request.body.email,
+            bcrypt.hashSync(request.body.senha, 10),
+            request.body.telefone,
+            request.body.data_nascimento,
+            request.body.endereco,
+            request.body.area_atuacao,
+            request.body.nome_responsavel,
+            request.body.necessidades_voluntarios,
+            request.body.requisitos_voluntarios,
+            request.body.certificações_afiliacoes,
+            img_logo
+        );
+        const query = "INSERT INTO usuarios_instituicoes(instituicao_cnpj, nome, email, senha, telefone, data_nascimento, endereco, area_atuacao, nome_responsavel, necessidades_voluntarios, requisitos_voluntarios, certificações_afiliacoes, img_logo) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         connection.query(query, params, (err, results) => {
         console.log(err, results);
          if (results) {
@@ -67,6 +66,7 @@ async function storeInstitutions(request, response) {
                      sql: err
                  });
          }
+        });
     });
 }
 

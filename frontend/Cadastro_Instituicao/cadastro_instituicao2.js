@@ -7,7 +7,7 @@ async function nextPage(event) {
     let email = dados_instituicoes1.email;
     let senha = dados_instituicoes1.senha;
     let telefone = dados_instituicoes1.telefone;
-    let data_nascimento = dados_instituicoes1.data_nascimento;
+    let data_abertura = dados_instituicoes1.data_abertura;
     let endereco = dados_instituicoes1.endereco;
     let area_atuacao = dados_instituicoes1.area_atuacao;
     let nome_responsavel = document.getElementById("nome_responsavel").value;
@@ -18,7 +18,7 @@ async function nextPage(event) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     } else { 
-        dados_instituicoes2 = { instituicao_cnpj, nome, email, senha, telefone, data_nascimento, endereco, area_atuacao, nome_responsavel, necessidades_voluntarios, requisitos_voluntarios }
+        dados_instituicoes2 = { instituicao_cnpj, nome, email, senha, telefone, data_abertura, endereco, area_atuacao, nome_responsavel, necessidades_voluntarios, requisitos_voluntarios }
         try {
             localStorage.setItem("data", JSON.stringify(dados_instituicoes2));
             window.location.pathname = "../frontend/Cadastro_Instituicao/cadastro_instituicao3.html";

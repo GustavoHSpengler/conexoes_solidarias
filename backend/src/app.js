@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
-const fm = require("fm");
+const fs = require("fs");
 const fileUpload = require("express-fileupload");
 
 const app = express();

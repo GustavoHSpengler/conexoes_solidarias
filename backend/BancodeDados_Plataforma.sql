@@ -21,13 +21,14 @@ CREATE TABLE usuarios_instituicoes (
     email VARCHAR(255) UNIQUE NOT NULL,
 	senha VARCHAR(255) UNIQUE NOT NULL,
     telefone VARCHAR(255) UNIQUE NOT NULL,
+    data_abertura DATE NOT NULL,
     endereco VARCHAR(255) NOT NULL,
     area_atuacao VARCHAR(255) NOT NULL,
     responsavel_nome VARCHAR(255) NOT NULL,
     necessidades_voluntarios VARCHAR(255) NOT NULL,
     requisitos_voluntarios VARCHAR(255) NOT NULL,
     certificações_afiliacoes VARCHAR(255) NOT NULL,
-    img_conta VARCHAR(255) NOT NULL
+    img_logo VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE tarefas_plataforma (

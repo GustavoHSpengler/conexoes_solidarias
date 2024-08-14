@@ -11,7 +11,7 @@ async function sendData(event) {
     conteudo.append("nome", dados_instituicoes2.nome);
     conteudo.append("email", dados_instituicoes2.email);
     conteudo.append("senha", dados_instituicoes2.senha);
-    conteudo.append("data_nascimento", dados_instituicoes2.data_nascimento);
+    conteudo.append("data_abertura", dados_instituicoes2.data_abertura);
     conteudo.append("telefone", dados_instituicoes2.telefone);
     conteudo.append("endereco", dados_instituicoes2.endereco);
     conteudo.append("area_atuacao", dados_instituicoes2.area_atuacao);
@@ -26,7 +26,7 @@ async function sendData(event) {
         conteudo.append("img_logo", fileName);
     }
 
-    if (!certificados_afiliacoes || !img_logo ) {
+    if (!img_logo ) {
         alert("Todos os campos precisam ser preenchidos!");
         return
     } 
@@ -38,10 +38,10 @@ async function sendData(event) {
     try {
         const response = await fetch('http://localhost:3005/api/storeVolunteers/task', {
             method: "POST",
-            headers: {                
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formDataObj)
+            // headers: {                
+            //     "Content-Type": "application/json",
+            // },
+            body: formDataObj
         });
         
         let content = await response.json();

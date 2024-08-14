@@ -25,18 +25,18 @@ async function nextPage(event) {
     let senha = document.getElementById("senha").value;
     let confirmar_senha = document.getElementById("confirmar_senha").value;
     let telefone = document.getElementById("telefone").value;
-    let data_nascimento = document.getElementById("data_nascimento").value;
+    let data_abertura = document.getElementById("data_abertura").value;
     let endereco = document.getElementById("endereco").value;
     let area_atuacao = document.getElementById("area_atuacao").value;
 
-    if (!instituicao_cnpj || !nome || !email || !senha || !confirmar_senha || !telefone || !data_nascimento || !endereco, !area_atuacao) {
+    if (!instituicao_cnpj || !nome || !email || !senha || !confirmar_senha || !telefone || !data_abertura || !endereco, !area_atuacao) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     } if (senha !== confirmar_senha) {
         alert("As senhas não correspondem. Por favor, tente novamente.");
         return;
     } else { 
-        dados_instituicoes1 = { cnpj, nome, email, senha, telefone, data_nascimento, endereco, area_atuacao }
+        dados_instituicoes1 = { cnpj, nome, email, senha, telefone, data_abertura, endereco, area_atuacao }
         try {
             localStorage.setItem("dados_instituicoes1", JSON.stringify(dados_instituicoes1));
             window.location.pathname = "../frontend/Cadastro_Instituicao/cadastro_instituicao2.html";
