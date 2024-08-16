@@ -36,7 +36,7 @@ async function nextPage(event) {
         alert("As senhas não correspondem. Por favor, tente novamente.");
         return;
     } else { 
-        dados_instituicoes1 = { cnpj, nome, email, senha, telefone, data_abertura, endereco, area_atuacao }
+        dados_instituicoes1 = { instituicao_cnpj, nome, email, senha, telefone, data_abertura, endereco, area_atuacao }
         try {
             localStorage.setItem("dados_instituicoes1", JSON.stringify(dados_instituicoes1));
             window.location.pathname = "../frontend/Cadastro_Instituicao/cadastro_instituicao2.html";

@@ -1,7 +1,7 @@
 async function sendData(event) {
     event.preventDefault();
     
-    let dados_instituicoes2 = JSON.parse(localStorage.getItem("dados_instituicoes2"));
+    let dados_instituicoes2 = JSON.parse(localStorage.getItem("data"));
 
     let form = document.getElementById("form");
 
@@ -19,29 +19,17 @@ async function sendData(event) {
     conteudo.append("necessidades_voluntarios", dados_instituicoes2.necessidades_voluntarios);
     conteudo.append("requisitos_voluntarios", dados_instituicoes2.requisitos_voluntarios);
     conteudo.append("certificados_afiliacoes", document.getElementById("certificados_afiliacoes").value);
-
-    const fileInput = document.getElementById("img_logo");
-    if (fileInput.files[0]) {
-        const fileName = fileInput.files[0].name;
-        conteudo.append("img_logo", fileName);
-    }
+    conteudo.append("img_logo", document.getElementById("img_logo").files[0]);
 
     if (!img_logo ) {
         alert("Todos os campos precisam ser preenchidos!");
         return
     } 
-    
-
-    const formDataObj = {};
-    conteudo.forEach((value, key) => (formDataObj[key] = value));
 
     try {
-        const response = await fetch('http://localhost:3005/api/storeVolunteers/task', {
+        const response = await fetch('http://localhost:3005/api/storeInstitutions/task', {
             method: "POST",
-            // headers: {                
-            //     "Content-Type": "application/json",
-            // },
-            body: formDataObj
+            body: conteudo
         });
         
         let content = await response.json();

@@ -15,7 +15,7 @@ async function storeVolunteers(request, response) {
         request.body.habilidades,
         request.body.interesses,
         request.body.nivel_experiencia,
-        request.body.img_conta
+        request.file.img_conta
     );
 
     const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
