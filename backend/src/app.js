@@ -1,9 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const path = require("path");
-const fs = require("fs");
-const fileUpload = require("express-fileupload");
 
 const app = express();
 
@@ -14,7 +11,6 @@ const routerInstitutions = require("./routes/taskRouter-instituicao");
 app.set("port", process.env.PORT || 3306);
 app.use(express.json()); 
 app.use(cors());
-app.use(fileUpload());
 
 app.use('/api', [
     routerVolunteer,
