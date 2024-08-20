@@ -1,11 +1,25 @@
+function previewImage(event) {
+    let input = event.target;
+    let visualizacao = document.getElementById('visualizacao_imagem');
+
+    if (input.files && input.files[0]) {
+        let visualizador = new FileReader();
+
+        visualizador.onload = function(e) {
+            visualizacao.src = e.target.result;
+            visualizacao.style.display = 'block';
+        }
+
+        visualizador.readAsDataURL(input.files[0]);
+    }
+}
+
 async function sendData(event) {
     event.preventDefault();
     
     let dados_instituicoes2 = JSON.parse(localStorage.getItem("data"));
 
-    let form = document.getElementById("form");
-
-    let conteudo = new FormData(form);
+    let conteudo = new FormData();
 
     conteudo.append("instituicao_cnpj", dados_instituicoes2.instituicao_cnpj);
     conteudo.append("nome", dados_instituicoes2.nome);
@@ -42,21 +56,5 @@ async function sendData(event) {
     } catch (error) {
         console.error("Erro: ", error);
         alert("Deu algo errado!");
-    }
-}
-
-function previewImage(event) {
-    let input = event.target;
-    let visualizacao = document.getElementById('visualizacao_imagem');
-
-    if (input.files && input.files[0]) {
-        let visualizador = new FileReader();
-
-        visualizador.onload = function(e) {
-            visualizacao.src = e.target.result;
-            visualizacao.style.display = 'block';
-        }
-
-        visualizador.readAsDataURL(input.files[0]);
     }
 }
