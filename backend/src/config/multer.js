@@ -1,30 +1,16 @@
-const express = require('express');
 const multer = require('multer');
 const path = require('path');
 
-const app = express();
-
+// Configuração do multer
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './src/upload/.'); 
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname}`); 
-  }
+    destination: function (req, file, cb) {
+        cb(null, './src/public'); // Diretório onde as imagens serão armazenadas
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname)); // Nome único para a imagem
+    }
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif/;
-  const mimetype = allowedTypes.test(file.mimetype);
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Apenas imagens')
-  }
-};
-
-const dowload = multer({ storage });
+const dowload = multer({ storage: storage });
 
 module.exports = dowload;

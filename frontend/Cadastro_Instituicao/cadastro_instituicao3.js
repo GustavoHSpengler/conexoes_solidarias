@@ -3,9 +3,7 @@ async function sendData(event) {
     
     let dados_instituicoes2 = JSON.parse(localStorage.getItem("data"));
 
-    let form = document.getElementById("form");
-
-    let conteudo = new FormData(form);
+    let conteudo = new FormData();
 
     conteudo.append("instituicao_cnpj", dados_instituicoes2.instituicao_cnpj);
     conteudo.append("nome", dados_instituicoes2.nome);
@@ -18,20 +16,21 @@ async function sendData(event) {
     conteudo.append("nome_responsavel", dados_instituicoes2.nome_responsavel);
     conteudo.append("necessidades_voluntarios", dados_instituicoes2.necessidades_voluntarios);
     conteudo.append("requisitos_voluntarios", dados_instituicoes2.requisitos_voluntarios);
-    conteudo.append("certificados_afiliacoes", document.getElementById("certificados_afiliacoes").value);
+    conteudo.append("certificacoes_afiliacoes", document.getElementById("certificacoes_afiliacoes").value);
     conteudo.append("img_logo", document.getElementById("img_logo").files[0]);
 
     if (!img_logo ) {
         alert("Todos os campos precisam ser preenchidos!");
         return
     } 
+    console.log(conteudo.get('img_logo'))
 
     try {
         const response = await fetch('http://localhost:3005/api/storeInstitutions/task', {
-            method: "POST",
+            method: "POST",            
             body: conteudo
         });
-        
+    
         let content = await response.json();
 
         if (content.success) {
@@ -43,6 +42,7 @@ async function sendData(event) {
         console.error("Erro: ", error);
         alert("Deu algo errado!");
     }
+    
 }
 
 function previewImage(event) {

@@ -3,41 +3,54 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 
 async function storeVolunteers(request, response) {
+    const { usuario_cpf, nome, email, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia } = request.body;
     
-    const params = Array(
-        request.body.usuario_cpf,
-        request.body.nome,
-        request.body.email,
-        bcrypt.hashSync(request.body.senha, 10),
-        request.body.telefone,
-        request.body.data_nascimento,
-        request.body.endereco,
-        request.body.habilidades,
-        request.body.interesses,
-        request.body.nivel_experiencia,
-        request.file.img_conta
-    );
+    const img_conta = request.file ? request.file.path : null;
+
+    if (!img_conta) {
+        return response.status(400).json({
+            success: false,
+            message: "Imagem de perfil é obrigatória!"
+        });
+    }
+
+    const senha = bcrypt.hashSync(request.body.senha, 10);
+
+    const params = [
+        usuario_cpf,
+        nome,
+        email,
+        senha,
+        telefone,
+        data_nascimento,
+        endereco,
+        habilidades,
+        interesses,
+        nivel_experiencia,
+        img_conta
+    ];
 
     const query = "INSERT INTO usuarios_voluntarios(usuario_cpf, nome, email, senha, telefone, data_nascimento, endereco, habilidades, interesses, nivel_experiencia, img_conta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        connection.query(query, params, (err, results) => {
+    
+    connection.query(query, params, (err, results) => {
         console.log(err, results);
-         if (results) {
-             response
-                 .status(201)
-                 .json({
-                     success: true,
-                     message: "Sucesso!", 
-                     data: results
-                 });
-         } else {
-             response
-                 .status(400)
-                 .json({
-                     success: false,
-                     message: "Ocorreu um problema!", 
-                     sql: err
-                 });
-         }
+            if (results) {
+                response
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: "Sucesso!", 
+                        data: results
+                    });
+            } else {
+                response
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Ocorreu um problema!", 
+                        sql: err
+                    });
+        }
     });
 }
 

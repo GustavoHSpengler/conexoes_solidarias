@@ -16,7 +16,7 @@ CREATE TABLE usuarios_voluntarios (
 );
 
 CREATE TABLE usuarios_instituicoes (
-	instituicao_cpf VARCHAR(255) PRIMARY KEY NOT NULL,
+	instituicao_cnpj VARCHAR(255) PRIMARY KEY NOT NULL,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
 	senha VARCHAR(255) UNIQUE NOT NULL,
@@ -24,10 +24,10 @@ CREATE TABLE usuarios_instituicoes (
     data_abertura DATE NOT NULL,
     endereco VARCHAR(255) NOT NULL,
     area_atuacao VARCHAR(255) NOT NULL,
-    responsavel_nome VARCHAR(255) NOT NULL,
+    nome_responsavel VARCHAR(255) NOT NULL,
     necessidades_voluntarios VARCHAR(255) NOT NULL,
     requisitos_voluntarios VARCHAR(255) NOT NULL,
-    certificações_afiliacoes VARCHAR(255) NOT NULL,
+    certificacoes_afiliacoes VARCHAR(255) NOT NULL,
     img_logo VARCHAR(255) NOT NULL
 );
 
