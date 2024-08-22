@@ -11,6 +11,8 @@
     --cor_de_fundo: rgba(193, 255, 114, 1);
     --cor_do_con-prin: rgba(208, 255, 148, 1);
     --cor_do_botao: rgba(193, 255, 114, 1);
+    --cor_do_botao_hover: rgba(80, 180, 80, 1);
+    --cor_do_texto: rgba(78, 199, 78, 1);
 }
 
 body {
@@ -23,8 +25,9 @@ body {
 
 .conteudo_principal {
     background-color: var(--cor_do_con-prin);
-    height: 750px;
-    width: 720px;
+    height: 570px;
+    width: 800px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -40,12 +43,13 @@ body {
         color: black;
     }
     img {
-        height: 90px;
-        width: 90px;
+        height: 100px;
+        width: 100px;
     }
     h2 {
         font-size: 2.5em;
         font-family: 'Inknut Antiqua', sans-serif;
+        color: var(--cor_do_texto);
     }
     button {
         background-color: var(--cor_do_botao);
@@ -68,6 +72,7 @@ body {
         align-self: center;
         font-size: 2.9em;
         font-family: 'Inknut Antiqua', sans-serif;
+        color: var(--cor_do_texto);
     }
     button {
         align-self: center;
@@ -80,21 +85,4 @@ body {
         font-size: 1.7em;
         font-family: 'Inknut Antiqua', sans-serif;
     }
-}
-
-.escolha {
-    cursor: pointer;
-    transition: 
-        scale 0.25s ease-in, 
-        opacity 0.25s ease-in, 
-        filter 0.25s ease-in;
-    &:hover {
-        scale: 1.2;
-    }
-}
-
-button:has(.escolha:hover) .escolha:not(hover) {
-    scale: 0.8; 
-    opacity: 0.8; 
-    filter: blur(4px);
 }

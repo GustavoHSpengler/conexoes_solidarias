@@ -1,3 +1,19 @@
+function previewImage(event) {
+    let input = event.target;
+    let visualizacao = document.getElementById('visualizacao_imagem');
+
+    if (input.files && input.files[0]) {
+        let visualizador = new FileReader();
+
+        visualizador.onload = function(e) {
+            visualizacao.src = e.target.result;
+            visualizacao.style.display = 'block';
+        }
+
+        visualizador.readAsDataURL(input.files[0]);
+    }
+}
+
 async function sendData(event) {
     event.preventDefault();
     
@@ -42,7 +58,6 @@ async function sendData(event) {
         console.error("Erro: ", error);
         alert("Deu algo errado!");
     }
-    
 }
 
 function previewImage(event) {

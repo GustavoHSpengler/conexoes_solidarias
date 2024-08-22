@@ -10,6 +10,8 @@
     --cor_de_fundo: rgba(193, 255, 114, 1);
     --cor_do_con-prin: rgba(208, 255, 148, 1);
     --cor_do_botao: rgba(193, 255, 114, 1);
+    --cor_do_botao_hover: rgba(80, 180, 80, 1);
+    --cor_do_texto: rgba(78, 199, 78, 1);
 }
 
 body {
@@ -22,27 +24,30 @@ body {
 
 .conteudo_principal {
     background-color: var(--cor_do_con-prin);
-    height: 80vh;
-    width: 40vw;
+    height: 570px;
+    width: 800px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .titulo_logo {
     display: flex;
-    margin-right: 5px;
-    padding: 2vh;
-    img {
-        height: 12vh;
-        width: 6.25vw;
-    }
-    h2 {
-        margin-left: 1em;
-        font-size: 2.5em;
-        font-family: 'Inknut Antiqua', sans-serif;
-        align-self: center;
-    }
+    align-items: center;
+    padding: 14px;
+}
 
+.titulo_logo img {
+    height: 100px;
+    width: 100px;
+}
+
+.titulo_logo h2 {
+    align-items: center;
+    margin-left: 80px;
+    font-size: 40px;
+    font-family: 'Inknut Antiqua', serif;
+    color: var(--cor_do_texto);
 }
 
 .cadastro_login {
@@ -57,6 +62,7 @@ body {
         align-self: center;
         font-size: 2.9em;
         font-family: 'Inknut Antiqua', sans-serif;
+        color: var(--cor_do_texto);
     }
     button {
         align-self: center;
@@ -69,18 +75,4 @@ body {
         font-size: 1.7em;
         font-family: 'Inknut Antiqua', sans-serif;
     }
-}
-
-.escolha {
-    cursor: pointer;
-    transition: scale 0.25s ease-in, opacity 0.25s ease-in, filter 0.25s ease-in;
-    &:hover {
-        scale: 1.2;
-    }
-}
-
-button:has(.escolha:hover) .escolha:not(hover) {
-    scale: 0.8; 
-    opacity: 0.8; 
-    filter: blur(4px);
 }

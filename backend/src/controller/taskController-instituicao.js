@@ -31,6 +31,7 @@ async function storeInstitutions(request, response) {
         certificacoes_afiliacoes,
         img_logo
     ];
+    
     const query = "INSERT INTO usuarios_instituicoes(instituicao_cnpj, nome, email, senha, telefone, data_abertura, endereco, area_atuacao, nome_responsavel, necessidades_voluntarios, requisitos_voluntarios, certificacoes_afiliacoes, img_logo) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     connection.query(query, params, (err, results) => {
@@ -52,7 +53,7 @@ async function storeInstitutions(request, response) {
                     sql: err
                 });
         }
-    });
+    }); 
 }
 
 module.exports = {
