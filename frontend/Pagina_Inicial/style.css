@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor_de_fundo: rgba(193, 255, 114, 1);
+    --cor_do_con-prin: rgba(208, 255, 148, 1);
+    --cor_do_botao: rgba(193, 255, 114, 1);
+    --cor_do_botao_hover: rgba(80, 180, 80, 1);
+    --cor_do_texto: rgba(78, 199, 78, 1);
+}
+
+body {
+    background-color: var(--cor_de_fundo);
+    height: 150vh;
+}
+
+nav {
+    background-color: var(--cor_do_con-prin);
+    padding: 1% 2%;
+    img {
+        height: 100px;
+        width: 100px;
+    }
+}
