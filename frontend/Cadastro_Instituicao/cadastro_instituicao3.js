@@ -42,7 +42,7 @@ async function sendData(event) {
     console.log(conteudo.get('img_logo'))
 
     try {
-        const response = await fetch('http://localhost:3005/api/storeInstitutions/task', {
+        const response = await fetch('http://localhost:3005/api/storeInstitutions/register', {
             method: "POST",            
             body: conteudo
         });

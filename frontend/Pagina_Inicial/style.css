@@ -20,8 +20,41 @@ body {
 }
 
 nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: var(--cor_do_con-prin);
     padding: 1% 2%;
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        h2 {
+            font-size: 30px;
+            font-family: 'Inknut Antiqua', serif;
+            margin-left: 20px;
+            color: var(--cor_do_texto);
+        }
+    }
+    .paginas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+            font-size: 14px;
+            font-family: 'Inknut Antiqua', serif;
+            margin-left: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: var(--cor_do_texto);
+        }
+    }
+    .conta_usuario {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
     img {
         height: 100px;
         width: 100px;

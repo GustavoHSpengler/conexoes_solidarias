@@ -23,7 +23,7 @@ async function sendData(event) {
     } 
 
     try {
-        const response = await fetch('http://localhost:3005/api/storeVolunteers/task', {
+        const response = await fetch('http://localhost:3005/api/storeVolunteers/register', {
             method: "POST",
             body: conteudo
         });

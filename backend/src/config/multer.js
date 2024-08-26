@@ -1,13 +1,12 @@
 const multer = require('multer');
 const path = require('path');
 
-// Configuração do multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './src/public'); // Diretório onde as imagens serão armazenadas
+        cb(null, './src/public');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Nome único para a imagem
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
