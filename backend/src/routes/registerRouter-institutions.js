@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const routerInstitutions = Router();
 const dowload = require("../config/multer");
-const { storeInstitutions } = require("../controller/taskController-instituicao");
+const { storeInstitutions } = require("../controller/registerController-institutions");
 
 routerInstitutions.post("/storeInstitutions/register", dowload.single('img_logo'), storeInstitutions);
 

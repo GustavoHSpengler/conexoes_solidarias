@@ -15,16 +15,19 @@ async function authenticateUser(tableName, email, senha) {
                 bcrypt.compare(senha, results[0].senha, (err, isMatch) => {
                     if (err) return reject(err);
                     if (isMatch) {
-                        const id = results[0].id;
-                        const token = jwt.sign({ userId: id, tableName }, process.env.JWT_SECRET, { expiresIn: '5m' });
-                        resolve({
-                            success: true,
-                            message: `Sucesso! Usuário conectado.`,
-                            data: {
-                                ...results[0],
-                                token: token
-                            }
-                        });
+                        if (isMatch) {
+                            const id = results[0].id;
+                            const token = jwt.sign({ userId: id, tableName }, process.env.JWT_SECRET, { expiresIn: '5m' });
+                            resolve({
+                                success: true,
+                                message: `Sucesso! Usuário conectado.`,
+                                data: {
+                                    ...results[0],
+                                    token: token,
+                                    tableName: tableName
+                                }
+                            });
+                        }                        
                     } else {
                         reject(new Error('Email ou senha está incorreto!'));
                     }

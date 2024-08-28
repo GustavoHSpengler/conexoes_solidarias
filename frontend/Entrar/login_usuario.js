@@ -6,7 +6,7 @@ async function recoverData(event) {
   
     const data = {email, senha};
   
-    const response = await fetch("http://localhost:3005/api/storeLogin/login", {
+    const response = await fetch("http://localhost:3005/api/storeLogin", {
       method: "POST",
       headers: {"Content-Type":"application/json;charset=UTF-8"},
       body: JSON.stringify(data)
@@ -15,10 +15,9 @@ async function recoverData(event) {
     const result = await response.json();
   
     if (result.success) {
-      console.log(result.data)
-      localStorage.setItem('userData', result.data)
+      localStorage.setItem('userData', JSON.stringify(result.data));
       window.location.href = "../Pagina_Inicial/pagina_inicial.html";
     } else {
       alert(result.message);
     }
-  }
+}
