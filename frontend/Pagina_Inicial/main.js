@@ -40,7 +40,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     if (result.success) {
         alert("Tarefa criada com sucesso!");
         addCardToPage(result.tarefaId, formData);
-        this.reset(); // Reseta o formulário após o envio
+        this.reset(); 
         document.getElementById("formTarefa").style.display = "none";
     } else {
         alert("Erro ao criar tarefa: " + result.message);

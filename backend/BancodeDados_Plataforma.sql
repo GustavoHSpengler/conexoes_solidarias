@@ -37,7 +37,6 @@ CREATE TABLE tarefas_plataforma (
     titulo VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     endereco VARCHAR(255) NOT NULL,
-    img_endereco VARCHAR(255) NOT NULL,
     duracao_estimada DATETIME NOT NULL,
     materias_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL,
