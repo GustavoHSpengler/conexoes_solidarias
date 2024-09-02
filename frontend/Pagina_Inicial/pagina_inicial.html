@@ -26,12 +26,50 @@
             </div>            
         </nav>
     </header>
-    <main> 
-        <div>
+    <main>
+        <div class="">
             <h1> Tarefas </h1>
-            
-        </div> 
+            <div> 
+                <button id="btnNovaTarefa"> <img src="/backend/src/public/img_botao.png" alt="imagem ilustrativa do botão da criação de tarefas"> </button>
+            </div>
+        
+            <div id="formTarefa" style="display: none;">
+                <h2>Criar Nova Tarefa</h2>
+                <form id="novaTarefaForm">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                    
+                    <label for="descricao">Descrição:</label>
+                    <textarea id="descricao" name="descricao" required></textarea>
+                    
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" required>
+                    
+                    <label for="img_tarefa">Imagem da Tarefa:</label>
+                    <input type="file" id="img_tarefa" name="img_tarefa">
+                    
+                    <label for="duracao_estimada">Duração Estimada:</label>
+                    <input type="datetime-local" id="duracao_estimada" name="duracao_estimada" required>
+                    
+                    <label for="materias_necessarios">Materiais Necessários:</label>
+                    <input type="text" id="materias_necessarios" name="materias_necessarios" required>
+                    
+                    <label for="qnt_voluntarios_necessarios">Quantidade de Voluntários Necessários:</label>
+                    <input type="number" id="qnt_voluntarios_necessarios" name="qnt_voluntarios_necessarios" required>
+                    
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" name="observacoes"></textarea>
+                    
+                    <button type="submit">Criar Tarefa</button>
+                </form>
+            </div>
+        
+            <div id="listaTarefas">
+                <!-- Cards de tarefas aparecerão aqui -->
+            </div>
+        </div>        
     </main>
+    
     <footer> 
         
     </footer>

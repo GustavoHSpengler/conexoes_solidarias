@@ -61,3 +61,32 @@ nav {
         width: 100px;
     }
 }
+
+
+.cardTarefa {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px 0;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.cardTarefa img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.cardTarefa .btnExpandir {
+    background-color: var(--cor_do_botao);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.cardTarefa .detalhesTarefa {
+    margin-top: 16px;
+}
