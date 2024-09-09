@@ -1,3 +1,19 @@
+function previewImage(event) {
+    let input = event.target;
+    let visualizacao = document.getElementById('visualizacao_imagem');
+
+    if (input.files && input.files[0]) {
+        let visualizador = new FileReader();
+
+        visualizador.onload = function(e) {
+            visualizacao.src = e.target.result;
+            visualizacao.style.display = 'block';
+        }
+
+        visualizador.readAsDataURL(input.files[0]);
+    }
+}
+
 async function sendData(event) {
     event.preventDefault();
     
@@ -17,7 +33,7 @@ async function sendData(event) {
     conteudo.append("nivel_experiencia", document.getElementById("nivel_experiencia").value);
     conteudo.append("img_conta", document.getElementById("img_conta").files[0]);
 
-    if (!habilidades || !interesses || !img_conta) {
+    if (!habilidades && !interesses && !img_conta) {
         alert("Todos os campos precisam ser preenchidos!");
         return
     } 
@@ -38,21 +54,5 @@ async function sendData(event) {
     } catch (error) {
         console.error("Erro: ", error);
         alert("Deu algo errado!");
-    }
-}
-
-function previewImage(event) {
-    let input = event.target;
-    let visualizacao = document.getElementById('visualizacao_imagem');
-
-    if (input.files && input.files[0]) {
-        let visualizador = new FileReader();
-
-        visualizador.onload = function(e) {
-            visualizacao.src = e.target.result;
-            visualizacao.style.display = 'block';
-        }
-
-        visualizador.readAsDataURL(input.files[0]);
     }
 }

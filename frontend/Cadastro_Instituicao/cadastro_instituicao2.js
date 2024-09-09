@@ -14,7 +14,7 @@ async function nextPage(event) {
     let necessidades_voluntarios = document.getElementById("necessidades_voluntarios").value;
     let requisitos_voluntarios = document.getElementById("requisitos_voluntarios").value;
 
-    if (!nome_responsavel || !necessidades_voluntarios || !requisitos_voluntarios) {
+    if (!nome_responsavel && !necessidades_voluntarios && !requisitos_voluntarios) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     } else { 

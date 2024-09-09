@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = JSON.parse(userData);
         console.log("Dados do usuário:", user);
 
-        document.getElementById("nomeUsuario").textContent = `Bem-vindo, ${user.nome || user.nome_responsavel}`;
+        document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
 
         if (user.img_conta) {
             document.getElementById("imagemUsuario").src = `src/public/${user.img_conta}`; 
@@ -15,9 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Nenhuma imagem disponível para o usuário.");
         }
 
-    // } else {
-        
-       // window.location.href = "../Login/login.html";
+    } else {
+       window.location.href = "../Login/login.html";
     }
 });
 
@@ -28,7 +27,7 @@ document.getElementById("btnNovaTarefa").addEventListener("click", () => {
 document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const formData = new FormData(this);
+    const formData = new FormData();
 
     const response = await fetch("http://localhost:3005/api/tarefas/criarTarefa", {
         method: "POST",

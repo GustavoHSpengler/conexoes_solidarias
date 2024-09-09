@@ -27,7 +27,7 @@ function nextStep(event) {
     let data_nascimento = document.getElementById("data_nascimento").value;
     let endereco        = document.getElementById("endereco").value;
 
-    if (!usuario_cpf || !nome || !email || !senha || !confirmar_senha || !telefone || !data_nascimento || !endereco) {
+    if (!usuario_cpf && !nome && !email && !senha && !confirmar_senha && !telefone && !data_nascimento && !endereco) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     } if (senha !== confirmar_senha) {

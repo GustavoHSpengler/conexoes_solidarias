@@ -29,7 +29,7 @@ async function nextPage(event) {
     let endereco = document.getElementById("endereco").value;
     let area_atuacao = document.getElementById("area_atuacao").value;
 
-    if (!instituicao_cnpj || !nome || !email || !senha || !confirmar_senha || !telefone || !data_abertura || !endereco, !area_atuacao) {
+    if (!instituicao_cnpj && !nome && !email && !senha && !confirmar_senha && !telefone && !data_abertura && !endereco && !area_atuacao) {
         alert("Todos os campos precisam ser preenchidos!");
         return;
     } if (senha !== confirmar_senha) {

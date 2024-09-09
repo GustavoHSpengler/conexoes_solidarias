@@ -24,7 +24,7 @@ body {
 
 .conteudo_principal {
     background-color: var(--cor_do_con-prin);
-    height: 570px;
+    height: 770px;
     width: 800px;
     padding: 20px;
     display: flex;
