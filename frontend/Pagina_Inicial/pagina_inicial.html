@@ -29,47 +29,50 @@
     <main>
         <div class="lista_tarefas">
             <h1> Tarefas </h1>
-            <div> 
-                <button id="btnNovaTarefa"> <img src="/backend/src/public/img_botao.png" alt="imagem ilustrativa do botão da criação de tarefas"> </button>
+    
+            <div class="novaTarefaContainer">
+                <button id="btnNovaTarefa" class="btnAdicionarTarefa">
+                    <img src="/backend/src/public/img_botao.png" alt="Botão adicionar tarefa">
+                    <h2> Adicionar Tarefa </h2> 
+                </button>
             </div>
-        
-            <div id="formTarefa" style="display: none;">
+    
+            <div id="formTarefa" class="formTarefa" style="display: none;">
                 <h2>Criar Nova Tarefa</h2>
                 <form id="novaTarefaForm">
                     <label for="titulo">Título:</label>
                     <input type="text" id="titulo" name="titulo" required>
-                    
+    
                     <label for="descricao">Descrição:</label>
                     <textarea id="descricao" name="descricao" required></textarea>
-                    
+    
                     <label for="endereco">Endereço:</label>
                     <input type="text" id="endereco" name="endereco" required>
-                    
+    
                     <label for="img_tarefa">Imagem da Tarefa:</label>
                     <input type="file" id="img_tarefa" name="img_tarefa">
-                    
+    
                     <label for="duracao_estimada">Duração Estimada:</label>
                     <input type="datetime-local" id="duracao_estimada" name="duracao_estimada" required>
-                    
+    
                     <label for="materias_necessarios">Materiais Necessários:</label>
                     <input type="text" id="materias_necessarios" name="materias_necessarios" required>
-                    
+    
                     <label for="qnt_voluntarios_necessarios">Quantidade de Voluntários Necessários:</label>
                     <input type="number" id="qnt_voluntarios_necessarios" name="qnt_voluntarios_necessarios" required>
-                    
+    
                     <label for="observacoes">Observações:</label>
                     <textarea id="observacoes" name="observacoes"></textarea>
-                    
-                    <button type="submit">Criar Tarefa</button>
+    
+                    <button type="submit" class="btnSubmit">Criar Tarefa</button>
                 </form>
             </div>
-        
-            <div id="listaTarefas">
-                <!-- As tarefas aparecerão aqui -->
+    
+            <div id="listaTarefas" class="cardContainer">
+                <!-- Tarefas aparecerão aqui -->
             </div>
         </div>        
-    </main>
-    
+    </main>    
     <footer> 
         
     </footer>
