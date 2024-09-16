@@ -1,3 +1,7 @@
+const btnNovaTarefa = document.getElementById("btnNovaTarefa");
+const overlayForm = document.getElementById("overlayForm");
+const fecharModal = document.getElementById("fecharModal");
+
 document.addEventListener("DOMContentLoaded", () => {
     const userData = localStorage.getItem('userData');
 
@@ -8,9 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
 
         if (user.img_conta) {
-            document.getElementById("imagemUsuario").src = `src/public/${user.img_conta}`; 
+            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`; 
         } else if (user.img_logo) {
-            document.getElementById("imagemUsuario").src = `src/public/${user.img_logo}`; 
+            document.getElementById("imagemUsuario").src = `http://localhost:3000/${user.img_logo}`; 
         } else {
             console.error("Nenhuma imagem disponível para o usuário.");
         }
@@ -20,14 +24,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-document.getElementById("btnNovaTarefa").addEventListener("click", () => {
-    document.getElementById("formTarefa").style.display = "block";
+btnNovaTarefa.addEventListener("click", () => {
+    overlayForm.style.display = "flex";
+});
+
+fecharModal.addEventListener("click", () => {
+    overlayForm.style.display = "none"; 
+});
+
+overlayForm.addEventListener("click", (event) => {
+    if (event.target === overlayForm) {
+        overlayForm.style.display = "none"; 
+    }
 });
 
 document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-
-    const formData = new FormData();
+    const formData = new FormData(this);
 
     const response = await fetch("http://localhost:3005/api/tarefas/criarTarefa", {
         method: "POST",
@@ -35,12 +48,11 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     });
 
     const result = await response.json();
-
     if (result.success) {
         alert("Tarefa criada com sucesso!");
         addCardToPage(result.tarefaId, formData);
-        this.reset(); 
-        document.getElementById("formTarefa").style.display = "none";
+        this.reset();
+        overlayForm.style.display = "none"; 
     } else {
         alert("Erro ao criar tarefa: " + result.message);
     }
@@ -58,7 +70,7 @@ function addCardToPage(tarefaId, formData) {
         <div class="detalhesTarefa" style="display: none;">
             <p>Endereço: ${formData.get('endereco')}</p>
             <p>Duração Estimada: ${formData.get('duracao_estimada')}</p>
-            <p>Materiais Necessários: ${formData.get('materias_necessarios')}</p>
+            <p>Materiais Necessários: ${formData.get('materiais_necessarios')}</p>
             <p>Voluntários Necessários: ${formData.get('qnt_voluntarios_necessarios')}</p>
             <p>Observações: ${formData.get('observacoes')}</p>
         </div>

@@ -9,8 +9,10 @@ const loginRouter = require("./routes/loginRouter");
 const routerInstitutions = require("./routes/registerRouter-institutions");
 
 app.set("port", process.env.PORT || 3306);
-app.use(express.json()); 
+app.use(express.json());
+app.use('/public', express.static('src/public'));
 app.use(cors());
+
 
 app.use('/api', [
     routerVolunteer,
