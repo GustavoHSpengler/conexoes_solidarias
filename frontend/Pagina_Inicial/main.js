@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (user.img_conta) {
             document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`; 
         } else if (user.img_logo) {
-            document.getElementById("imagemUsuario").src = `http://localhost:3000/${user.img_logo}`; 
+            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_logo}`; 
         } else {
             console.error("Nenhuma imagem disponível para o usuário.");
         }
@@ -40,17 +40,25 @@ overlayForm.addEventListener("click", (event) => {
 
 document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-    const formData = new FormData(this);
+    const conteudo = new FormData();
+    conteudo.append("titulo", document.getElementById("titulo").value);
+    conteudo.append("descricao", document.getElementById("descricao").value);
+    conteudo.append("endereco", document.getElementById("endereco").value);
+    conteudo.append("duracao_estimada", document.getElementById("duracao_estimada").value);
+    conteudo.append("materiais_necessarios", document.getElementById("materiais_necessarios").value);
+    conteudo.append("qnt_voluntarios_necessarios", document.getElementById("qnt_voluntarios_necessarios").value);
+    conteudo.append("observacoes", document.getElementById("observacoes").value);
+    conteudo.append("img_tarefa", document.getElementById("img_tarefa").files[0]); 
 
-    const response = await fetch("http://localhost:3005/api/tarefas/criarTarefa", {
+    const response = await fetch("http://localhost:3005/api/storeTasks", {
         method: "POST",
-        body: formData
+        body: conteudo
     });
 
     const result = await response.json();
     if (result.success) {
         alert("Tarefa criada com sucesso!");
-        addCardToPage(result.tarefaId, formData);
+        addCardToPage(result.tarefaId, conteudo); 
         this.reset();
         overlayForm.style.display = "none"; 
     } else {
@@ -58,21 +66,21 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     }
 });
 
-function addCardToPage(tarefaId, formData) {
+function addCardToPage(tarefaId, conteudo) {
     const card = document.createElement("div");
     card.classList.add("cardTarefa");
 
     card.innerHTML = `
-        <h3>${formData.get('titulo')}</h3>
-        <img src="/public/${formData.get('img_tarefa').name}" alt="Imagem da tarefa">
-        <p>${formData.get('descricao')}</p>
+        <h3>${conteudo.get('titulo')}</h3>
+        <img src="${imgSrc}" alt="Imagem da tarefa">
+        <p>${conteudo.get('descricao')}</p>
         <button class="btnExpandir">Expandir</button>
         <div class="detalhesTarefa" style="display: none;">
-            <p>Endereço: ${formData.get('endereco')}</p>
-            <p>Duração Estimada: ${formData.get('duracao_estimada')}</p>
-            <p>Materiais Necessários: ${formData.get('materiais_necessarios')}</p>
-            <p>Voluntários Necessários: ${formData.get('qnt_voluntarios_necessarios')}</p>
-            <p>Observações: ${formData.get('observacoes')}</p>
+            <p>Endereço: ${conteudo.get('endereco')}</p>
+            <p>Duração Estimada: ${conteudo.get('duracao_estimada')}</p>
+            <p>Materiais Necessários: ${conteudo.get('materiais_necessarios')}</p>
+            <p>Voluntários Necessários: ${conteudo.get('qnt_voluntarios_necessarios')}</p>
+            <p>Observações: ${conteudo.get('observacoes')}</p>
         </div>
     `;
 
