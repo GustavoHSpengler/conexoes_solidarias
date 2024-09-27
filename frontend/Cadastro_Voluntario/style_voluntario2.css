@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--cor_de_fundo);
-    height: 150vh;
+    height: 138vh;
     display: flex;
     justify-content: center;
     margin-top: 50px;
@@ -25,6 +25,7 @@ body {
 .conteudo_principal {
     background-color: var(--cor_do_con-prin);
     height: auto;
+    height: 1070px;
     width: 600px;
     padding: 20px;
     display: flex;
