@@ -40,8 +40,7 @@ CREATE TABLE tarefas_plataforma (
     duracao_estimada DATETIME NOT NULL,
     materiais_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL, 
-    observacoes VARCHAR(255) NOT NULL,
-    participantes JSON 
+    observacoes VARCHAR(255) NOT NULL, 
 );
 
 
@@ -59,3 +58,5 @@ CREATE TABLE mensagens_plataforma (
     paragrafo VARCHAR(255) NOT NULL,
     img_mensagem VARCHAR(255) NOT NULL
 );
+
+// tarefas_plataforma - participantes JSON
