@@ -33,18 +33,17 @@ CREATE TABLE usuarios_instituicoes (
 
 CREATE TABLE tarefas_plataforma (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    img_tarefa VARCHAR(255) NOT NULL,
-    nome VARCHAR(255) NOT NULL,
+    img_tarefas VARCHAR(255) NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
-    objetivos VARCHAR(255) NOT NULL,
-    requisitos VARCHAR(255) NOT NULL,
     endereco VARCHAR(255) NOT NULL,
-    duracao_estimada VARCHAR(255) NOT NULL,
-    materiais_necessarios VARCHAR(255) NOT NULL
+    duracao_estimada DATETIME NOT NULL,
+    materiais_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL, 
     observacoes VARCHAR(255) NOT NULL,
     participantes JSON 
 );
+
 
 
 CREATE TABLE postagens_plataforma (

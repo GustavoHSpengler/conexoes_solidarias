@@ -7,7 +7,7 @@ const app = express();
 const routerVolunteer = require("./routes/registerRouter-volunteer");
 const routerInstitutions = require("./routes/registerRouter-institutions");
 const loginRouter = require("./routes/loginRouter");
-const tasksRouter = require("./routes/tasksRouter");
+const taskRouter = require("./routes/tasksRouter");
 
 app.set("port", process.env.PORT || 3306);
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use('/api', [
     routerVolunteer,
     routerInstitutions,
     loginRouter,
-    tasksRouter
+    taskRouter
 ]);
 
 module.exports = app;

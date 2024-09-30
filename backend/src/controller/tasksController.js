@@ -1,6 +1,10 @@
+const connection = require('../config/db');
+
 async function storeTasks(request, response) {
     const { titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes } = request.body;
     const img_tarefas = request.files ? request.files.map(file => file.path) : [];
+
+
 
     if (img_tarefas.length === 0) {
         return response.status(400).json({
@@ -20,7 +24,7 @@ async function storeTasks(request, response) {
         JSON.stringify(img_tarefas) 
     ];
 
-    const query = "INSERT INTO tarefas_plataforma(titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes, img_tarefa) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    const query = "INSERT INTO tarefas_plataforma(titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes, img_tarefas) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     
     connection.query(query, params, (err, results) => {
         if (results) {

@@ -3,6 +3,6 @@ const taskRouter = Router();
 const upload = require("../config/multer");
 const { storeTasks } = require("../controller/tasksController");
 
-taskRouter.post("/tasks", upload.array('img_tarefa'), storeTasks);
+taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
 
 module.exports = taskRouter;
