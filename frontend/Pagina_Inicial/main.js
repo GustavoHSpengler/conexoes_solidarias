@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
 
         if (user.img_conta) {
-            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`; 
+            document.getElementById("imagemUsuario").src = `http://localhost:3306/public/${user.img_conta}`;
         } else if (user.img_logo) {
             document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_logo}`; 
         } else {

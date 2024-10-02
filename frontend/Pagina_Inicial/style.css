@@ -40,6 +40,9 @@ nav {
             height: 80px;
             width: 80px;
         }
+        #imagemUsuario {
+            border-radius: 50%;
+        }
     }
     .paginas {
         display: flex;
