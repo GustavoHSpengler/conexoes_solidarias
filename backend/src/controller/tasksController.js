@@ -5,7 +5,6 @@ async function storeTasks(request, response) {
     const img_tarefas = request.files ? request.files.map(file => file.path) : [];
 
 
-
     if (img_tarefas.length === 0) {
         return response.status(400).json({
             success: false,
