@@ -43,6 +43,7 @@ async function storeVolunteers(request, response) {
                         data: results
                     });
             } else {
+                console.log(err)
                 response
                     .status(400)
                     .json({

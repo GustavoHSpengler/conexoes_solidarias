@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
 
         if (user.img_conta) {
-            document.getElementById("imagemUsuario").src = `${user.img_conta}`;
+            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`;
         } else if (user.img_logo) {
             document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_logo}`; 
         } else {
@@ -102,17 +102,17 @@ function addCardToPage(tarefaId, tarefa) {
         detalhes.style.display = detalhes.style.display === "none" ? "block" : "none";
     });
 
-    card.querySelector('.Participar').addEventListener("click", async function () {
-        const tarefaId = this.getAttribute('data-id');
-        const response = await fetch(`http://localhost:3005/api/tasks`, {
-            method: "POST"
-        });
+    // card.querySelector('.Participar').addEventListener("click", async function () {
+    //     const tarefaId = this.getAttribute('data-id');
+    //     const response = await fetch(`http://localhost:3005/api/tasks`, {
+    //         method: "POST"
+    //     });
 
-        const result = await response.json();
-        if (result.success) {
-            alert("Você se inscreveu na tarefa com sucesso!");
-        } else {
-            alert("Erro ao se inscrever na tarefa: " + result.message);
-        }
-    });
+    //     const result = await response.json();
+    //     if (result.success) {
+    //         alert("Você se inscreveu na tarefa com sucesso!");
+    //     } else {
+    //         alert("Erro ao se inscrever na tarefa: " + result.message);
+    //     }
+    // });
 }

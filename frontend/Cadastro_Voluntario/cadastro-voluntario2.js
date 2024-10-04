@@ -46,8 +46,11 @@ async function sendData(event) {
         
         let content = await response.json();
 
+        console.log(content)
+
         if (content.success) {
-           window.location.pathname = "/frontend/Entrar/login.html";
+            console.log(content)
+            window.location.href = "./frontend/Entrar/login.html";
         } else {        
            alert("Deu algo errado!");       
         }

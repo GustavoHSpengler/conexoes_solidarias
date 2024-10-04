@@ -133,7 +133,7 @@ nav {
         display: none;
         align-items: center;
         justify-content: center;
-        z-index: 1000;
+        z-index: 100;
     }
     #formTarefa {
         background-color: #a6bc86; 
