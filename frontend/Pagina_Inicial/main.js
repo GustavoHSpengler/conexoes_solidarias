@@ -55,6 +55,8 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
         tarefa.append("img_tarefas", imgFiles[i]);
     }
 
+    console.log(tarefa);
+
     const response = await fetch("http://localhost:3005/api/tasks", {
         method: "POST",
         body: tarefa
@@ -102,17 +104,17 @@ function addCardToPage(tarefaId, tarefa) {
         detalhes.style.display = detalhes.style.display === "none" ? "block" : "none";
     });
 
-    // card.querySelector('.Participar').addEventListener("click", async function () {
-    //     const tarefaId = this.getAttribute('data-id');
-    //     const response = await fetch(`http://localhost:3005/api/tasks`, {
-    //         method: "POST"
-    //     });
+    card.querySelector('.Participar').addEventListener("click", async function () {
+        const tarefaId = this.getAttribute('data-id');
+        const response = await fetch(`http://localhost:3005/api/tasks`, {
+            method: "POST"
+        });
 
-    //     const result = await response.json();
-    //     if (result.success) {
-    //         alert("Você se inscreveu na tarefa com sucesso!");
-    //     } else {
-    //         alert("Erro ao se inscrever na tarefa: " + result.message);
-    //     }
-    // });
+        const result = await response.json();
+        if (result.success) {
+            alert("Você se inscreveu na tarefa com sucesso!");
+        } else {
+            alert("Erro ao se inscrever na tarefa: " + result.message);
+        }
+    });
 }

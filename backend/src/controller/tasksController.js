@@ -1,7 +1,10 @@
 const connection = require('../config/db');
+const dotenv = require('dotenv').config();
+
 
 async function storeTasks(request, response) {
     const { titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes } = request.body;
+
     const img_tarefas = request.files ? request.files.map(file => file.path) : [];
 
 
@@ -20,8 +23,10 @@ async function storeTasks(request, response) {
         materiais_necessarios,
         qnt_voluntarios_necessarios,
         observacoes,
-        JSON.stringify(img_tarefas) 
+        img_tarefas
     ];
+
+    console.log(params);
 
     const query = "INSERT INTO tarefas_plataforma(titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes, img_tarefas) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     
