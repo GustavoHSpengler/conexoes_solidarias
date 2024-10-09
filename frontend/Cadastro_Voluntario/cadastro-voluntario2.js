@@ -50,7 +50,7 @@ async function sendData(event) {
 
         if (content.success) {
             console.log(content)
-            window.location.href = "./frontend/Entrar/login.html";
+            window.location.pathname = "./frontend/Entrar/login.html";
         } else {        
            alert("Deu algo errado!");       
         }

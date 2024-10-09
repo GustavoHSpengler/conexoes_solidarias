@@ -10,17 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Dados do usuário:", user);
 
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-
+        
         if (user.img_conta) {
-            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`;
+            const caminhoCorreto = user.img_conta.replace(/\\/g, '/');
+            document.getElementById("imagemUsuario").src = `${window.location.origin}/${caminhoCorreto}`;
         } else if (user.img_logo) {
-            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_logo}`; 
+            const caminhoCorreto = user.img_logo.replace(/\\/g, '/');
+            document.getElementById("imagemUsuario").src = `${window.location.origin}/${caminhoCorreto}`;
         } else {
             console.error("Nenhuma imagem disponível para o usuário.");
         }
 
     } else {
-       window.location.href = "../Login/login.html";
+        window.location.href = "../Login/login.html";
     }
 });
 
