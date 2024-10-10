@@ -1,7 +1,3 @@
-const btnNovaTarefa = document.getElementById("btnNovaTarefa");
-const overlayForm = document.getElementById("overlayForm");
-const fecharModal = document.getElementById("fecharModal");
-
 document.addEventListener("DOMContentLoaded", () => {
     const userData = localStorage.getItem('userData');
 
@@ -25,6 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../Login/login.html";
     }
 });
+
+const btnNovaTarefa = document.getElementById("btnNovaTarefa");
+const overlayForm = document.getElementById("overlayForm");
+const fecharModal = document.getElementById("fecharModal");
 
 btnNovaTarefa.addEventListener("click", () => {
     overlayForm.style.display = "flex";

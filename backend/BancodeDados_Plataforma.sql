@@ -41,9 +41,8 @@ CREATE TABLE tarefas_plataforma (
     materiais_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL, 
     observacoes VARCHAR(255) NOT NULL, 
+    participantes JSON
 );
-
-
 
 CREATE TABLE postagens_plataforma (
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -59,4 +58,4 @@ CREATE TABLE mensagens_plataforma (
     img_mensagem VARCHAR(255) NOT NULL
 );
 
-// tarefas_plataforma - participantes JSON
+// tarefas_plataforma - 
