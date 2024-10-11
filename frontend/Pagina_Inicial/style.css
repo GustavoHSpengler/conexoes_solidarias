@@ -17,7 +17,7 @@
 
 body {
     background-color: var(--cor_de_fundo);
-    height: 150vh;
+    height: 130vh;
 }
 
 nav {
@@ -40,9 +40,6 @@ nav {
             height: 80px;
             width: 80px;
         }
-        #imagemUsuario {
-            border-radius: 50%;
-        }
     }
     .paginas {
         display: flex;
@@ -63,9 +60,10 @@ nav {
         align-items: center;
         justify-content: flex-end;
         margin-left: 30px;
-        .imagemUsuario {
+        #imagemUsuario {
             height: 80px;
             width: 80px;
+            border-radius: 50%;
         }
         .nomeUsuario {
             font-size: 10px;

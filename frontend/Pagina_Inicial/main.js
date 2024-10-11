@@ -7,12 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
         
+        
+
         if (user.img_conta) {
             const caminhoCorreto = user.img_conta.replace(/\\/g, '/');
-            document.getElementById("imagemUsuario").src = `${window.location.origin}/${caminhoCorreto}`;
+            document.getElementById("imagemUsuario").src = `${window.location.origin}${user.img_conta}`;
         } else if (user.img_logo) {
             const caminhoCorreto = user.img_logo.replace(/\\/g, '/');
-            document.getElementById("imagemUsuario").src = `${window.location.origin}/${caminhoCorreto}`;
+            document.getElementById("imagemUsuario").src = `${window.location.origin}${caminhoCorreto}`;
         } else {
             console.error("Nenhuma imagem disponível para o usuário.");
         }
