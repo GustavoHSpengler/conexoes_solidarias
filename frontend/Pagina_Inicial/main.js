@@ -59,8 +59,6 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
         tarefa.append("img_tarefas", imgFiles[i]);
     }
 
-    console.log(tarefa);
-
     const response = await fetch("http://localhost:3005/api/tasks", {
         method: "POST",
         body: tarefa
