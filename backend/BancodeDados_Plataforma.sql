@@ -33,15 +33,24 @@ CREATE TABLE usuarios_instituicoes (
 
 CREATE TABLE tarefas_plataforma (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    img_tarefas VARCHAR(255) NOT NULL,
     titulo VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     endereco VARCHAR(255) NOT NULL,
     duracao_estimada DATETIME NOT NULL,
     materiais_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL, 
-    observacoes VARCHAR(255) NOT NULL, 
-    participantes JSON
+    observacoes TEXT NOT NULL,
+    img_tarefas VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE participantes (
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    tarefaId INT NOT NULL,
+    cpf VARCHAR(255) NOT NULL,
+    cnpj VARCHAR(255) NOT NULL,
+    FOREIGN KEY (tarefaId) REFERENCES tarefas_plataforma(id) ON DELETE CASCADE,
+    FOREIGN KEY (cpf) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
+    FOREIGN KEY (cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
 CREATE TABLE postagens_plataforma (
