@@ -54,11 +54,23 @@ CREATE TABLE participantes (
 );
 
 CREATE TABLE postagens_plataforma (
-	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	img_postagem VARCHAR(255) NOT NULL,
     titulo VARCHAR(255) NOT NULL,
     paragrafo VARCHAR(255) NOT NULL,
     curtida INT NOT NULL
+);
+
+CREATE TABLE comentarios (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    texto TEXT NOT NULL,
+    img_comentario VARCHAR(255) NOT NULL,
+    postagens_id INT NOT NULL,
+    cpf VARCHAR(255) NOT NULL,
+    cnpj VARCHAR(255) NOT NULL,
+    FOREIGN KEY (postagens_id) REFERENCES postagens_plataforma(id) ON DELETE CASCADE,
+    FOREIGN KEY (cpf) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
+    FOREIGN KEY (cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
 CREATE TABLE mensagens_plataforma (
@@ -67,4 +79,4 @@ CREATE TABLE mensagens_plataforma (
     img_mensagem VARCHAR(255) NOT NULL
 );
 
-// tarefas_plataforma - 
+CREATE TABLE usuarios_conversas {}

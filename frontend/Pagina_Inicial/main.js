@@ -80,9 +80,11 @@ function addCardToPage(tarefaId, tarefa) {
     card.classList.add("cardTarefa");
 
     let imgHTML = '';
-    tarefa.getAll('img_tarefas').forEach((imgSrc, index) => {
+    const imagens = JSON.parse(tarefa.get('img_tarefas'));
+    imagens.forEach((imgSrc, index) => {
         imgHTML += `<img src="${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
     });
+
 
     card.innerHTML = `
         <h3>${tarefa.get('titulo')}</h3>
@@ -98,6 +100,8 @@ function addCardToPage(tarefaId, tarefa) {
             <button class="Participar" data-id="${tarefaId}">Participar</button>
         </div>
     `;
+
+    console.log(tarefaId, tarefa);
 
     document.getElementById("listaTarefas").appendChild(card);
 
