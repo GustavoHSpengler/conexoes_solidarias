@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
 
         if (user.img_conta) {
-            const caminhoCorreto = user.img_conta.replace(/\\/g, '/');
+            const caminhoCorreto = user.img_conta.replace(/\D/g, '/');
             document.getElementById("imagemUsuario").src = `${window.location.origin}${user.img_conta}`;
         } else if (user.img_logo) {
-            const caminhoCorreto = user.img_logo.replace(/\\/g, '/');
+            const caminhoCorreto = user.img_logo.replace(/\D/g, '/');
             document.getElementById("imagemUsuario").src = `${window.location.origin}${caminhoCorreto}`;
         } else {
             console.error("Nenhuma imagem disponível para o usuário.");
@@ -87,25 +87,26 @@ function addCardToPage(tarefaId, tarefa) {
 
 
     card.innerHTML = `
-        <h3>${tarefa.get('titulo')}</h3>
-        ${imgHTML}
-        <p>${tarefa.get('descricao')}</p>
-        <button class="btnExpandir">Expandir</button>
-        <div class="detalhesTarefa" style="display: none;">
-            <p>Endereço: ${tarefa.get('endereco')}</p>
-            <p>Duração Estimada: ${tarefa.get('duracao_estimada')}</p>
-            <p>Materiais Necessários: ${tarefa.get('materiais_necessarios')}</p>
-            <p>Voluntários Necessários: ${tarefa.get('qnt_voluntarios_necessarios')}</p>
-            <p>Observações: ${tarefa.get('observacoes')}</p>
-            <button class="Participar" data-id="${tarefaId}">Participar</button>
+        ${card}
+            <h3>${tarefa.get('titulo')}</h3>
+            ${imgHTML}
+            <p>${tarefa.get('descricao')}</p>
+            <button class="expandir">Expandir</button>
+            <div class="detalhesTarefa" style="display: none;">
+                <p>Endereço: ${tarefa.get('endereco')}</p>
+                <p>Duração Estimada: ${tarefa.get('duracao_estimada')}</p>
+                <p>Materiais Necessários: ${tarefa.get('materiais_necessarios')}</p>
+                <p>Voluntários Necessários: ${tarefa.get('qnt_voluntarios_necessarios')}</p>
+                <p>Observações: ${tarefa.get('observacoes')}</p>
+                <button class="Participar" data-id="${tarefaId}">Participar</button>
         </div>
-    `;
+                `;
 
     console.log(tarefaId, tarefa);
 
     document.getElementById("listaTarefas").appendChild(card);
 
-    card.querySelector('.btnExpandir').addEventListener("click", () => {
+    card.querySelector('.expandir').addEventListener("click", () => {
         const detalhes = card.querySelector('.detalhesTarefa');
         detalhes.style.display = detalhes.style.display === "none" ? "block" : "none";
     });

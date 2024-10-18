@@ -4,7 +4,6 @@ const dotenv = require('dotenv').config();
 async function storeTasks(request, response) {
     const { titulo, descricao, endereco, duracao_estimada, materiais_necessarios, qnt_voluntarios_necessarios, observacoes } = request.body;
 
-    // Armazenar as imagens como JSON no banco
     const img_tarefas = request.files ? JSON.stringify(request.files.map(file => file.path)) : [];
 
     if (img_tarefas.length === 0) {
@@ -46,9 +45,8 @@ async function storeTasks(request, response) {
 
 const participarTarefa = async (req, res) => {
     const { tarefaId } = req.params;
-    const { usuarioId, tipoUsuario } = req.body; // O usuário que está tentando participar
+    const { usuarioId, tipoUsuario } = req.body; 
     try {
-      // Verifica se a tarefa existe
       const tarefa = await db.query(
         'SELECT * FROM tarefas_plataforma WHERE id = ?',
         [tarefaId]
@@ -62,12 +60,10 @@ const participarTarefa = async (req, res) => {
       const tipoCriador = tarefa[0].tipo_criador;
       const limiteVoluntarios = tarefa[0].qnt_voluntarios_necessarios;
   
-      // Verifica se o criador está tentando participar da própria tarefa
       if (criadorId === usuarioId && tipoCriador === tipoUsuario) {
         return res.status(400).json({ message: 'Você não pode participar da própria tarefa.' });
       }
   
-      // Verifica se o número de participantes já atingiu o limite
       const [participantes] = await db.query(
         'SELECT COUNT(*) AS total FROM participantes WHERE tarefaId = ?',
         [tarefaId]
@@ -77,7 +73,6 @@ const participarTarefa = async (req, res) => {
         return res.status(400).json({ message: 'O limite de voluntários já foi atingido.' });
       }
   
-      // Insere o novo participante
       await db.query(
         'INSERT INTO participantes (tarefaId, usuario_id, tipo_usuario) VALUES (?, ?, ?)',
         [tarefaId, usuarioId, tipoUsuario]
