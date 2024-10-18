@@ -40,17 +40,19 @@ CREATE TABLE tarefas_plataforma (
     materiais_necessarios VARCHAR(255) NOT NULL,
     qnt_voluntarios_necessarios INT NOT NULL, 
     observacoes TEXT NOT NULL,
-    img_tarefas VARCHAR(255) NOT NULL
+    img_tarefas VARCHAR(255) NOT NULL,
+    criador_id INT NOT NULL,
+    tipo_criador ENUM('voluntario', 'instituicao') NOT NULL
 );
 
 CREATE TABLE participantes (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     tarefaId INT NOT NULL,
-    cpf VARCHAR(255) NOT NULL,
-    cnpj VARCHAR(255) NOT NULL,
+    usuario_id VARCHAR(255) NOT NULL,  
+    tipo_usuario ENUM('voluntario', 'instituicao') NOT NULL,
     FOREIGN KEY (tarefaId) REFERENCES tarefas_plataforma(id) ON DELETE CASCADE,
-    FOREIGN KEY (cpf) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
-    FOREIGN KEY (cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
+    FOREIGN KEY (usuario_id) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
 CREATE TABLE postagens_plataforma (
@@ -78,5 +80,3 @@ CREATE TABLE mensagens_plataforma (
     paragrafo VARCHAR(255) NOT NULL,
     img_mensagem VARCHAR(255) NOT NULL
 );
-
-CREATE TABLE usuarios_conversas {}

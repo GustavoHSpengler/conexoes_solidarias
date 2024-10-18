@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const taskRouter = Router();
 const upload = require("../config/multer");
-const { storeTasks } = require("../controller/tasksController");
+const { storeTasks, participarTarefa } = require("../controller/tasksController");
 
 /**
  * @swagger
@@ -20,5 +20,7 @@ const { storeTasks } = require("../controller/tasksController");
  */
 
 taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
+
+taskRouter.post("/tasks/:tarefaId/participar", participarTarefa);
 
 module.exports = taskRouter;

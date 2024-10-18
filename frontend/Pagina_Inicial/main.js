@@ -112,10 +112,16 @@ function addCardToPage(tarefaId, tarefa) {
 
     card.querySelector('.Participar').addEventListener("click", async function () {
         const tarefaId = this.getAttribute('data-id');
-        const response = await fetch(`http://localhost:3005/api/tasks`, {
-            method: "POST"
+        const userData = { cpf: `${user.usuario_cpf}`, cnpj: `${user.instituicao_cnpj}` }; 
+    
+        const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
         });
-
+    
         const result = await response.json();
         if (result.success) {
             alert("Você se inscreveu na tarefa com sucesso!");
