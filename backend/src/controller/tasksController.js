@@ -43,11 +43,11 @@ async function storeTasks(request, response) {
     });
 }
 
-const adicionarTarefa = async (req, res) => {
+const addTasks = async (req, res) => {
   const {  } = req.params
 }
 
-const participarTarefa = async (req, res) => {
+const joinTasks = async (req, res) => {
     const { tarefaId } = req.params;
     const { usuarioId, tipoUsuario } = req.body; 
     try {
@@ -92,6 +92,6 @@ const participarTarefa = async (req, res) => {
 
 module.exports = {
     storeTasks,
-    adicionarTarefa,
-    participarTarefa,  
+    addTasks,
+    joinTasks,  
 };

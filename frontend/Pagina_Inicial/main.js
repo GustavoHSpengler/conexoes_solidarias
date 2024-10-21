@@ -1,4 +1,14 @@
+async function getCards(){
+    const response = await fetch('http://localhost:3005/tasks/', {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json"
+    }
+});
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    getCards();
     const userData = localStorage.getItem('userData');
 
     if (userData) {
@@ -67,7 +77,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     const result = await response.json();
     if (result.success) {
         alert("Tarefa criada com sucesso!");
-        addCardToPage(result.tarefaId, tarefa); 
+        //addCardToPage(result.tarefaId, tarefa); 
         this.reset();
         overlayForm.style.display = "none"; 
     } else {
@@ -76,6 +86,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 });
 
 function addCardToPage(tarefaId, tarefa) {
+    console.log("ENTROU NO CARD TO PAGE")
     const card = document.createElement("div");
     card.classList.add("cardTarefa");
 
