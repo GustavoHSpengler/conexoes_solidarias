@@ -20,7 +20,7 @@ const { storeTasks, participarTarefa } = require("../controller/tasksController"
  */
 
 taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
-
+taskRouter.post("/tasks/:id", storeTasks);
 taskRouter.post("/tasks/:tarefaId/participar", participarTarefa);
 
 module.exports = taskRouter;
