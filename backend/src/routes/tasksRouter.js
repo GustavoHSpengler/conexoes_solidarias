@@ -52,7 +52,7 @@ const { storeTasks, getTasks, joinTasks } = require("../controller/tasksControll
  */
 
 taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
-taskRouter.get("/tasks/:id", getTasks);
+taskRouter.get("/tasks/:tarefaId", getTasks);
 taskRouter.post("/tasks/:tarefaId/participar", joinTasks);
 
 module.exports = taskRouter;

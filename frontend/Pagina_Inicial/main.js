@@ -1,6 +1,6 @@
 async function getCards() {
     try {
-        const response = await fetch('http://localhost:3005/tasks/:id', {
+        const response = await fetch('http://localhost:3005/api/tasks/:tarefaId', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -78,6 +78,8 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     tarefa.append("materiais_necessarios", document.getElementById("materiais_necessarios").value);
     tarefa.append("qnt_voluntarios_necessarios", document.getElementById("qnt_voluntarios_necessarios").value);
     tarefa.append("observacoes", document.getElementById("observacoes").value);
+    tarefa.append("", )
+
 
     const imgFiles = document.getElementById("img_tarefas").files;
     for (let i = 0; i < imgFiles.length; i++) {
