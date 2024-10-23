@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const taskRouter = Router();
 const upload = require("../config/multer");
-const { storeTasks, participarTarefa } = require("../controller/tasksController");
+const { storeTasks, getTasks, joinTasks } = require("../controller/tasksController");
 
 /**
  * @swagger
@@ -19,8 +19,40 @@ const { storeTasks, participarTarefa } = require("../controller/tasksController"
  *                type: object  
  */
 
+/**
+ * @swagger
+ * /tasks/:id:
+ *  get:
+ *    summary: Recuperar tarefas.
+ *    responses:
+ *      200:  
+ *        description: Sucesso!
+ *        content:
+ *          aplication/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                type: object  
+ */
+
+/**
+ * @swagger
+ * /tasks/:tarefaId/participar:
+ *  post:
+ *    summary: Participar das tarefas.
+ *    responses:
+ *      200:  
+ *        description: Sucesso!
+ *        content:
+ *          aplication/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                type: object  
+ */
+
 taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
-taskRouter.post("/tasks/:id", storeTasks);
-taskRouter.post("/tasks/:tarefaId/participar", participarTarefa);
+taskRouter.get("/tasks/:id", getTasks);
+taskRouter.post("/tasks/:tarefaId/participar", joinTasks);
 
 module.exports = taskRouter;

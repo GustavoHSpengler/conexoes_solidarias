@@ -1,10 +1,25 @@
-async function getCards(){
-    const response = await fetch('http://localhost:3005/tasks/', {
-        method: "GET",
-        headers: {
-        "Content-Type": "application/json"
+async function getCards() {
+    try {
+        const response = await fetch('http://localhost:3005/tasks/:id', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar as tarefas");
+        }
+
+        const tarefas = await response.json();
+
+        tarefas.forEach(tarefa => {
+            addCardToPage(tarefa.id, tarefa);
+        });
+
+    } catch (error) {
+        console.error("Erro ao buscar tarefas: ", error);
     }
-});
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -76,8 +91,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 
     const result = await response.json();
     if (result.success) {
-        alert("Tarefa criada com sucesso!");
-        //addCardToPage(result.tarefaId, tarefa); 
+        alert("Tarefa criada com sucesso!"); 
         this.reset();
         overlayForm.style.display = "none"; 
     } else {
@@ -86,34 +100,31 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 });
 
 function addCardToPage(tarefaId, tarefa) {
-    console.log("ENTROU NO CARD TO PAGE")
     const card = document.createElement("div");
     card.classList.add("cardTarefa");
 
     let imgHTML = '';
-    const imagens = JSON.parse(tarefa.get('img_tarefas'));
-    imagens.forEach((imgSrc, index) => {
-        imgHTML += `<img src="${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
-    });
-
+    if (tarefa.img_tarefa) {
+        const imagens = JSON.parse(tarefa.img_tarefa); 
+        imagens.forEach((imgSrc, index) => {
+            imgHTML += `<img src="${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
+        });
+    }
 
     card.innerHTML = `
-        ${card}
-            <h3>${tarefa.get('titulo')}</h3>
-            ${imgHTML}
-            <p>${tarefa.get('descricao')}</p>
-            <button class="expandir">Expandir</button>
-            <div class="detalhesTarefa" style="display: none;">
-                <p>Endereço: ${tarefa.get('endereco')}</p>
-                <p>Duração Estimada: ${tarefa.get('duracao_estimada')}</p>
-                <p>Materiais Necessários: ${tarefa.get('materiais_necessarios')}</p>
-                <p>Voluntários Necessários: ${tarefa.get('qnt_voluntarios_necessarios')}</p>
-                <p>Observações: ${tarefa.get('observacoes')}</p>
-                <button class="Participar" data-id="${tarefaId}">Participar</button>
+        <h3>${tarefa.nome}</h3>
+        ${imgHTML}
+        <p>${tarefa.descricao}</p>
+        <button class="expandir">Expandir</button>
+        <div class="detalhesTarefa" style="display: none;">
+            <p>Endereço: ${tarefa.endereco}</p>
+            <p>Duração Estimada: ${tarefa.duracao_estimada}</p>
+            <p>Materiais Necessários: ${tarefa.materiais_necessarios}</p>
+            <p>Voluntários Necessários: ${tarefa.qnt_voluntarios_necessarios}</p>
+            <p>Observações: ${tarefa.observacoes}</p>
+            <button class="Participar" data-id="${tarefaId}">Participar</button>
         </div>
-                `;
-
-    console.log(tarefaId, tarefa);
+    `;
 
     document.getElementById("listaTarefas").appendChild(card);
 
@@ -124,16 +135,16 @@ function addCardToPage(tarefaId, tarefa) {
 
     card.querySelector('.Participar').addEventListener("click", async function () {
         const tarefaId = this.getAttribute('data-id');
-        const userData = { cpf: `${user.usuario_cpf}`, cnpj: `${user.instituicao_cnpj}` }; 
+        const userData = JSON.parse(localStorage.getItem('userData')); 
     
         const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({ cpf: userData.usuario_cpf })
         });
-    
+
         const result = await response.json();
         if (result.success) {
             alert("Você se inscreveu na tarefa com sucesso!");
