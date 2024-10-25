@@ -46,12 +46,22 @@ async function storeTasks(request, response) {
 async function getTasks(req, res) {
   const { tarefaId } = req.params;
   try {
-    const [tarefas_plataforma] = await db.query(
-      'SELECT * FROM tarefas_plataforma WHERE id = ?'
-      [ tarefaId ]
-    );
+    connection.query(
+      'SELECT * FROM tarefas_plataforma WHERE id = ?',
+      [tarefaId],
+      (error, results) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ message: 'Erro ao recuperar tarefa.' });
+        }
 
-    
+        if (results.length === 0) {
+          return res.status(404).json({ message: 'Tarefa não encontrada.' });
+        }
+
+        res.status(200).json(results[0]);
+      }
+    );
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Erro ao recuperar tarefa.' });

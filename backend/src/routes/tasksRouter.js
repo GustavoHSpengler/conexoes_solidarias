@@ -12,28 +12,30 @@ const { storeTasks, getTasks, joinTasks } = require("../controller/tasksControll
  *      200:  
  *        description: Sucesso!
  *        content:
- *          aplication/json:
+ *          application/json:
  *            schema:
  *              type: array
  *              items:
  *                type: object  
  */
+taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
 
 /**
  * @swagger
- * /tasks/:id:
+ * /tasks/:tarefaId:
  *  get:
  *    summary: Recuperar tarefas.
  *    responses:
  *      200:  
  *        description: Sucesso!
  *        content:
- *          aplication/json:
+ *          application/json:
  *            schema:
  *              type: array
  *              items:
  *                type: object  
  */
+taskRouter.get("/tasks/:tarefaId", getTasks);
 
 /**
  * @swagger
@@ -44,15 +46,12 @@ const { storeTasks, getTasks, joinTasks } = require("../controller/tasksControll
  *      200:  
  *        description: Sucesso!
  *        content:
- *          aplication/json:
+ *          application/json:
  *            schema:
  *              type: array
  *              items:
  *                type: object  
  */
-
-taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
-taskRouter.get("/tasks/:tarefaId", getTasks);
 taskRouter.post("/tasks/:tarefaId/participar", joinTasks);
 
 module.exports = taskRouter;

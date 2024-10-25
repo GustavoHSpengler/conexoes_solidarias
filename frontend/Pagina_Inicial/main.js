@@ -1,15 +1,11 @@
 async function getCards() {
     try {
-        const response = await fetch('http://localhost:3005/api/tasks/:tarefaId', {
+        const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}`, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { "Content-Type": "application/json" }
         });
 
-        if (!response.ok) {
-            throw new Error("Erro ao buscar as tarefas");
-        }
+        if (!response.ok) throw new Error("Erro ao buscar as tarefas");
 
         const tarefas = await response.json();
 
@@ -24,26 +20,16 @@ async function getCards() {
 
 document.addEventListener("DOMContentLoaded", () => {
     getCards();
-    const userData = localStorage.getItem('userData');
 
+    const userData = localStorage.getItem('userData');
     if (userData) {
         const user = JSON.parse(userData);
-        console.log("Dados do usuário:", user);
-
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        
-        
-
-        if (user.img_conta) {
-            const caminhoCorreto = user.img_conta.replace(/\D/g, '/');
-            document.getElementById("imagemUsuario").src = `${window.location.origin}${user.img_conta}`;
-        } else if (user.img_logo) {
-            const caminhoCorreto = user.img_logo.replace(/\D/g, '/');
+        const imgSrc = user.img_conta || user.img_logo;
+        if (imgSrc) {
+            const caminhoCorreto = imgSrc.replace(/\\/g, '/');
             document.getElementById("imagemUsuario").src = `${window.location.origin}${caminhoCorreto}`;
-        } else {
-            console.error("Nenhuma imagem disponível para o usuário.");
         }
-
     } else {
         window.location.href = "../Login/login.html";
     }
@@ -78,8 +64,6 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     tarefa.append("materiais_necessarios", document.getElementById("materiais_necessarios").value);
     tarefa.append("qnt_voluntarios_necessarios", document.getElementById("qnt_voluntarios_necessarios").value);
     tarefa.append("observacoes", document.getElementById("observacoes").value);
-    tarefa.append("", )
-
 
     const imgFiles = document.getElementById("img_tarefas").files;
     for (let i = 0; i < imgFiles.length; i++) {
@@ -93,9 +77,10 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 
     const result = await response.json();
     if (result.success) {
-        alert("Tarefa criada com sucesso!"); 
+        alert("Tarefa criada com sucesso!");
         this.reset();
-        overlayForm.style.display = "none"; 
+        overlayForm.style.display = "none";
+        getCards(); // Recarregar as tarefas
     } else {
         alert("Erro ao criar tarefa: " + result.message);
     }
@@ -107,14 +92,14 @@ function addCardToPage(tarefaId, tarefa) {
 
     let imgHTML = '';
     if (tarefa.img_tarefa) {
-        const imagens = JSON.parse(tarefa.img_tarefa); 
+        const imagens = JSON.parse(tarefa.img_tarefa);
         imagens.forEach((imgSrc, index) => {
             imgHTML += `<img src="${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
         });
     }
 
     card.innerHTML = `
-        <h3>${tarefa.nome}</h3>
+        <h3>${tarefa.titulo}</h3>
         ${imgHTML}
         <p>${tarefa.descricao}</p>
         <button class="expandir">Expandir</button>
@@ -141,9 +126,7 @@ function addCardToPage(tarefaId, tarefa) {
     
         const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cpf: userData.usuario_cpf })
         });
 
