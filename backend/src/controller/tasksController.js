@@ -72,7 +72,7 @@ async function getTasks(req, res) {
 
 async function joinTasks(req, res) {
   const { tarefaId } = req.params;
-  const { usuario_id, tipo_usuario } = req.body; // Altere para pegar do corpo da requisição
+  const { usuario_id, tipo_usuario } = req.body; 
   try {
       const tarefa = await db.query(
           'SELECT qnt_voluntarios_necessarios, criador_id, tipo_criador FROM tarefas_plataforma WHERE id = ?',

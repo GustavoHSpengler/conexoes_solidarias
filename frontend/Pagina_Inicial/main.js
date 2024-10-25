@@ -25,11 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userData) {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        const imgSrc = user.img_conta || user.img_logo;
-        if (imgSrc) {
-            const caminhoCorreto = imgSrc.replace(/\\/g, '/');
-            document.getElementById("imagemUsuario").src = `${window.location.origin}${caminhoCorreto}`;
-        }
+        // const caminhoCorreto = imgSrc.replace(/\\/g, '/');
+        document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta || user.img_logo}`;
     } else {
         window.location.href = "../Login/login.html";
     }
