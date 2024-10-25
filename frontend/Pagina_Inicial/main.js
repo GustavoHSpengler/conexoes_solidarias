@@ -55,7 +55,8 @@ overlayForm.addEventListener("click", (event) => {
 
 document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-    
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const tarefa = new FormData();
     tarefa.append("titulo", document.getElementById("titulo").value);
     tarefa.append("descricao", document.getElementById("descricao").value);
@@ -64,6 +65,8 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     tarefa.append("materiais_necessarios", document.getElementById("materiais_necessarios").value);
     tarefa.append("qnt_voluntarios_necessarios", document.getElementById("qnt_voluntarios_necessarios").value);
     tarefa.append("observacoes", document.getElementById("observacoes").value);
+    tarefa.append("criador_id", userData.usuario_cpf || userData.instituicao_cnpj);
+    tarefa.append("tipo_criador", userData.usuario_cpf ? 'voluntario' : 'instituicao');
 
     const imgFiles = document.getElementById("img_tarefas").files;
     for (let i = 0; i < imgFiles.length; i++) {
@@ -80,7 +83,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
         alert("Tarefa criada com sucesso!");
         this.reset();
         overlayForm.style.display = "none";
-        getCards(); // Recarregar as tarefas
+        getCards(); 
     } else {
         alert("Erro ao criar tarefa: " + result.message);
     }
