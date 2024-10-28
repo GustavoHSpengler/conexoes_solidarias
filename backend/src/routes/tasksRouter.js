@@ -22,7 +22,7 @@ taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
 
 /**
  * @swagger
- * /tasks/:tarefaId:
+ * /tasks:
  *  get:
  *    summary: Recuperar tarefas.
  *    responses:
@@ -35,7 +35,7 @@ taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
  *              items:
  *                type: object  
  */
-taskRouter.get("/tasks/:tarefaId", getTasks);
+taskRouter.get("/tasks", getTasks);
 
 /**
  * @swagger
