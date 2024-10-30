@@ -1,23 +1,3 @@
-async function getCards() {
-    try {
-        const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        });
-
-        if (!response.ok) throw new Error("Erro ao buscar as tarefas");
-
-        const tarefas = await response.json();
-
-        tarefas.forEach(tarefa => {
-            addCardToPage(tarefa.id, tarefa);
-        });
-
-    } catch (error) {
-        console.error("Erro ao buscar tarefas: ", error);
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     getCards();
 
@@ -25,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userData) {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        // const caminhoCorreto = imgSrc.replace(/\\/g, '/');
         document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta || user.img_logo}`;
     } else {
         window.location.href = "../Login/login.html";
@@ -50,12 +29,16 @@ overlayForm.addEventListener("click", (event) => {
     }
 });
 
-document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) {
+document.getElementById("novaTarefaForm").addEventListener("submit", async function (event) { 
     event.preventDefault();
 
     const userData = JSON.parse(localStorage.getItem('userData'));
-    console.log(userData.usuario_cpf);
-    console.log(userData.instituicao_cnpj);
+
+    // Verifique se todos os campos obrigatórios estão preenchidos
+    if (!document.getElementById("titulo").value || !document.getElementById("descricao").value) {
+        alert("Título e descrição são obrigatórios!");
+        return;
+    }
 
     const tarefa = new FormData();
     tarefa.append("titulo", document.getElementById("titulo").value);
@@ -67,14 +50,14 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     tarefa.append("observacoes", document.getElementById("observacoes").value);
     
     if (userData.usuario_cpf) {
-        console.log("entrou no CPF")
         tarefa.append("criador_id", userData.usuario_cpf);
         tarefa.append("tipo_criador", 'voluntario');
-
     } else if (userData.instituicao_cnpj) {
-        console.log("Entrou no cnpj")
         tarefa.append("criador_id", userData.instituicao_cnpj);
         tarefa.append("tipo_criador", 'instituicao');
+    } else {
+        alert("Usuário não autenticado corretamente!");
+        return;
     }
 
     const imgFiles = document.getElementById("img_tarefas").files;
@@ -82,26 +65,50 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
         tarefa.append("img_tarefas", imgFiles[i]);
     }
 
+    try {
+        const response = await fetch("http://localhost:3005/api/tasks", {
+            method: "POST",
+            body: tarefa
+        });
 
-    tarefa.forEach(element => {
-        alert(element);
-    });
+        if (!response.ok) {
+            throw new Error('Erro na criação da tarefa: ' + response.statusText);
+        }
 
-    const response = await fetch("http://localhost:3005/api/tasks", {
-        method: "POST",
-        body: tarefa
-    });
-
-    const result = await response.json();
-    if (result.success) {
-        alert("Tarefa criada com sucesso!");
-        this.reset();
-        overlayForm.style.display = "none";
-        getCards(); 
-    } else {
-        alert("Erro ao criar tarefa: " + result.message);
+        const result = await response.json();
+        if (result.success) {
+            alert("Tarefa criada com sucesso!");
+            this.reset();
+            overlayForm.style.display = "none";
+            getCards(); 
+        } else {
+            alert("Erro ao criar tarefa: " + result.message);
+        }
+    } catch (error) {
+        alert("Ocorreu um erro: " + error.message);
     }
 });
+
+
+async function getCards() {
+    try {
+        const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) throw new Error("Erro ao buscar as tarefas");
+
+        const tarefas = await response.json();
+
+        tarefas.forEach(tarefa => {
+            addCardToPage(tarefa.id, tarefa);
+        });
+
+    } catch (error) {
+        console.error("Erro ao buscar tarefas: ", error);
+    }
+}
 
 function addCardToPage(tarefaId, tarefa) {
     const card = document.createElement("div");

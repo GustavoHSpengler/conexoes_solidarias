@@ -41,10 +41,16 @@ CREATE TABLE tarefas_plataforma (
     qnt_voluntarios_necessarios INT NOT NULL, 
     observacoes TEXT NOT NULL,
     img_tarefas VARCHAR(255) NOT NULL,
-    criador_id VARCHAR(255),
-    tipo_criador ENUM('voluntario', 'instituicao') NOT NULL,
-    FOREIGN KEY (criador_id) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
-    FOREIGN KEY (criador_id) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
+    tipo_criador ENUM('voluntario', 'instituicao') NOT NULL
+);
+
+create table tarefas_ids (
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_tarefa INT NOT NULL,
+	id_criador_cpf VARCHAR(255) NULL,
+    id_criador_cnpj VARCHAR(255) NULL,
+    FOREIGN KEY (id_criador_cpf) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
+    FOREIGN KEY (id_criador_cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
 CREATE TABLE participantes (
