@@ -54,6 +54,9 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     event.preventDefault();
 
     const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log(userData.usuario_cpf);
+    console.log(userData.instituicao_cnpj);
+
     const tarefa = new FormData();
     tarefa.append("titulo", document.getElementById("titulo").value);
     tarefa.append("descricao", document.getElementById("descricao").value);
@@ -62,13 +65,27 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     tarefa.append("materiais_necessarios", document.getElementById("materiais_necessarios").value);
     tarefa.append("qnt_voluntarios_necessarios", document.getElementById("qnt_voluntarios_necessarios").value);
     tarefa.append("observacoes", document.getElementById("observacoes").value);
-    tarefa.append("criador_id", userData.usuario_cpf || userData.instituicao_cnpj);
-    tarefa.append("tipo_criador", userData.usuario_cpf ? 'voluntario' : 'instituicao');
+    
+    if (userData.usuario_cpf) {
+        console.log("entrou no CPF")
+        tarefa.append("criador_id", userData.usuario_cpf);
+        tarefa.append("tipo_criador", 'voluntario');
+
+    } else if (userData.instituicao_cnpj) {
+        console.log("Entrou no cnpj")
+        tarefa.append("criador_id", userData.instituicao_cnpj);
+        tarefa.append("tipo_criador", 'instituicao');
+    }
 
     const imgFiles = document.getElementById("img_tarefas").files;
     for (let i = 0; i < imgFiles.length; i++) {
         tarefa.append("img_tarefas", imgFiles[i]);
     }
+
+
+    tarefa.forEach(element => {
+        alert(element);
+    });
 
     const response = await fetch("http://localhost:3005/api/tasks", {
         method: "POST",
