@@ -88,27 +88,6 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
     }
 });
 
-
-async function getCards() {
-    try {
-        const response = await fetch(`http://localhost:3005/api/tasks/`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        });
-
-        if (!response.ok) throw new Error("Erro ao buscar as tarefas");
-
-        const tarefas = await response.json();
-
-        Object.keys(tarefas).forEach(function(k){
-            addCardToPage(tarefas[k]);
-        });
-
-    } catch (error) {
-        console.error("Erro ao buscar tarefas: ", error);
-    }
-}
-
 function addCardToPage(tarefa) {
     const card = document.createElement("div");
     card.classList.add("cardTarefa");
@@ -160,4 +139,24 @@ function addCardToPage(tarefa) {
             alert("Erro ao se inscrever na tarefa: " + result.message);
         }
     });
+}
+
+async function getCards() {
+    try {
+        const response = await fetch(`http://localhost:3005/api/tasks`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) throw new Error("Erro ao buscar as tarefas");
+
+        const tarefas = await response.json();
+
+        Object.keys(tarefas).forEach(function(k){
+            addCardToPage(tarefas[k]);
+        });
+
+    } catch (error) {
+        console.error("Erro ao buscar tarefas: ", error);
+    }
 }

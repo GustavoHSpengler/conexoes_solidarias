@@ -61,28 +61,28 @@ async function storeTasks(request, response) {
 }
 
 async function getTasks(req, res) {
-  const { tarefaId } = req.params;
-  try {
-      connection.query(
-          'SELECT * FROM tarefas_plataforma',
-          [tarefaId],
-          (error, results) => {
-              if (error) {
-                  console.error(error);
-                  return res.status(500).json({ message: 'Erro ao recuperar tarefa.' });
-              }
+    const { tarefaId } = req.params;
+    try {
+        connection.query(
+            'SELECT * FROM tarefas_plataforma',
+            [tarefaId],
+            (error, results) => {
+                if (error) {
+                    console.error(error);
+                    return res.status(500).json({ message: 'Erro ao recuperar a tarefa.' });
+                }
 
-              if (results.length === 0) {
-                  return res.status(404).json({ message: 'Tarefa não encontrada.' });
-              }
+                if (results.length === 0) {
+                    return res.status(404).json({ message: 'Tarefa não encontrada.' });
+                }
 
-              res.status(200).json(results[0]);
-          }
-      );
-  } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Erro ao recuperar tarefa.' });
-  }
+                res.status(200).json(results[0]);
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erro ao recuperar a tarefa.' });
+    }
 }
 
 async function joinTasks(req, res) {
