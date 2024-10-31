@@ -34,8 +34,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 
     const userData = JSON.parse(localStorage.getItem('userData'));
 
-    // Verifique se todos os campos obrigatórios estão preenchidos
-    if (!document.getElementById("titulo").value || !document.getElementById("descricao").value) {
+    if (!document.getElementById("titulo").value && !document.getElementById("descricao").value) {
         alert("Título e descrição são obrigatórios!");
         return;
     }
