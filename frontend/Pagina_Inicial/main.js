@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userData) {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta || user.img_logo}`;
+        if (user.usuario_cpf) {
+            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`;
+        } else if {    
+            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_logo}`;
+        }
     } else {
         window.location.href = "../Login/login.html";
     }
