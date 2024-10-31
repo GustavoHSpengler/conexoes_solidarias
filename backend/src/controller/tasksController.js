@@ -64,7 +64,7 @@ async function getTasks(req, res) {
   const { tarefaId } = req.params;
   try {
       connection.query(
-          'SELECT * FROM tarefas_plataforma WHERE id = ?',
+          'SELECT * FROM tarefas_plataforma',
           [tarefaId],
           (error, results) => {
               if (error) {

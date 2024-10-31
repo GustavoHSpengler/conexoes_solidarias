@@ -91,7 +91,7 @@ document.getElementById("novaTarefaForm").addEventListener("submit", async funct
 
 async function getCards() {
     try {
-        const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}`, {
+        const response = await fetch(`http://localhost:3005/api/tasks/`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });
@@ -100,8 +100,8 @@ async function getCards() {
 
         const tarefas = await response.json();
 
-        tarefas.forEach(tarefa => {
-            addCardToPage(tarefa.id, tarefa);
+        Object.keys(tarefas).forEach(function(k){
+            addCardToPage(tarefas[k]);
         });
 
     } catch (error) {
@@ -109,7 +109,7 @@ async function getCards() {
     }
 }
 
-function addCardToPage(tarefaId, tarefa) {
+function addCardToPage(tarefa) {
     const card = document.createElement("div");
     card.classList.add("cardTarefa");
 
@@ -132,7 +132,7 @@ function addCardToPage(tarefaId, tarefa) {
             <p>Materiais Necessários: ${tarefa.materiais_necessarios}</p>
             <p>Voluntários Necessários: ${tarefa.qnt_voluntarios_necessarios}</p>
             <p>Observações: ${tarefa.observacoes}</p>
-            <button class="Participar" data-id="${tarefaId}">Participar</button>
+            <button class="Participar">Participar</button>
         </div>
     `;
 
