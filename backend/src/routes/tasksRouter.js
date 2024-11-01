@@ -18,6 +18,7 @@ const { storeTasks, getTasks, joinTasks } = require("../controller/tasksControll
  *              items:
  *                type: object  
  */
+
 taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
 
 /**
@@ -35,6 +36,7 @@ taskRouter.post("/tasks", upload.array('img_tarefas'), storeTasks);
  *              items:
  *                type: object  
  */
+
 taskRouter.get("/tasks", getTasks);
 
 /**

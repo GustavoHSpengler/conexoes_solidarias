@@ -89,7 +89,6 @@ nav {
         width: 90px;
     }
     .novaTarefaContainer {
-        display: flex;
         justify-content: start;
         margin-bottom: 20px;
     }
@@ -109,11 +108,16 @@ nav {
         background-color: #69df6f;
     }
     .cardTarefa {
-        background-color: rgba(208, 255, 148, 1); 
-        padding: 20px;
+        height: 386px;
+        width: 273px;
+        align-items: center;
+        background-color: #a6bc86; 
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
+        margin: 0px 0px;
         text-align: left;
     }
     .cardTarefa img {
