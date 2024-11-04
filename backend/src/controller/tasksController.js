@@ -61,22 +61,29 @@ async function storeTasks(request, response) {
 }
 
 async function getTasks(req, res) {
-    const { tarefaId } = req.params;
+    const { tarefaId } = req.params; // Captura o ID da tarefa dos parâmetros da requisição
     try {
+        // Se tarefaId estiver presente, busque apenas a tarefa específica
+        const query = tarefaId 
+            ? 'SELECT * FROM tarefas_plataforma WHERE id = ?' 
+            : 'SELECT * FROM tarefas_plataforma'; // Caso contrário, busque todas as tarefas
+
         connection.query(
-            'SELECT * FROM tarefas_plataforma',
-            [tarefaId],
+            query,
+            tarefaId ? [tarefaId] : [], // Passa o ID como parâmetro apenas se estiver presente
             (error, results) => {
                 if (error) {
                     console.error(error);
                     return res.status(500).json({ message: 'Erro ao recuperar a tarefa.' });
                 }
 
-                if (results.length === 0) {
+                // Se não houver resultados, retorne 404 (apenas se buscando por tarefaId)
+                if (tarefaId && results.length === 0) {
                     return res.status(404).json({ message: 'Tarefa não encontrada.' });
                 }
 
-                res.status(200).json(results[0]);
+                // Retorne todas as tarefas se não houver tarefaId, ou apenas a tarefa específica
+                res.status(200).json(results);
             }
         );
     } catch (error) {
@@ -84,6 +91,7 @@ async function getTasks(req, res) {
         return res.status(500).json({ message: 'Erro ao recuperar a tarefa.' });
     }
 }
+
 
 async function joinTasks(req, res) {
   const { tarefaId } = req.params;

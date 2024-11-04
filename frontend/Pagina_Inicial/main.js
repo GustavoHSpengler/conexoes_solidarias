@@ -5,9 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userData) {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        if (user.usuario_cpf) {
-            document.getElementById("imagemUsuario").src = `http://localhost:3005/${user.img_conta}`;
-        } 
+        console.log(user);
+        // if (user.usuario_cpf) {
+        //     const imgElement = document.getElementById("imagemUsuario");
+        //     imgElement.src = `http://localhost:3005/${user.img_conta}`;
+        // } 
     } else {
         window.location.href = "../Login/login.html";
     }
@@ -103,8 +105,8 @@ async function getCards() {
         console.log(data);
 
         const tarefas = Array.isArray(data) ? data : [data]; 
-        
-        tarefas.forEach(function(tarefa) {
+        console.log(tarefas);
+        tarefas.forEach(tarefa => {
             const card = document.createElement("div");
             card.classList.add("cardTarefa");
 
