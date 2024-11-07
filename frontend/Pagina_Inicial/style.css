@@ -84,6 +84,11 @@ nav {
         height: 84px;
         margin-bottom: 40px;
     }
+    .Tarefas {
+        display: flex;
+        gap: 50px;
+        margin-right: 100px;
+    }
     img {
         height: 90px;
         width: 90px;
@@ -107,6 +112,10 @@ nav {
     .btnAdicionarTarefa:hover {
         background-color: #69df6f;
     }
+    .cardContainer {
+        display: flex;
+        gap: 50px;
+    }
     .cardTarefa {
         height: 386px;
         width: 273px;
@@ -121,9 +130,8 @@ nav {
         text-align: left;
     }
     .cardTarefa img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
+        width: 60px;
+        height: 70px;
         margin-bottom: 15px;
     }
     .overlay {
@@ -196,5 +204,4 @@ nav {
         color: white;
         background-color: #43493a;
     }
-
 }

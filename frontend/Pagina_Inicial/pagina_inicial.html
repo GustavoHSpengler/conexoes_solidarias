@@ -30,48 +30,50 @@
         <main>
             <div class="lista_tarefas">
                 <h1>Tarefas</h1>
-                <div class="novaTarefaContainer">
-                    <button id="btnNovaTarefa" class="btnAdicionarTarefa">
-                        <img src="/backend/src/public/img_botao.png" alt="Botão adicionar tarefa">
-                        <h2>Adicionar Tarefa</h2>
-                    </button>
-                </div>
-                
-                <div id="listaTarefas" class="cardContainer">
-                    <!-- As novas tarefas aparecerão aqui -->
-                </div>
-                
-                <div class="overlay" id="overlayForm">
-                    <div id="formTarefa">
-                        <button id="fecharModal"> X </button>
-                        <h2>Criar Nova Tarefa</h2>
-                        <form id="novaTarefaForm" enctype="multipart/form-data">
-                            <label for="titulo">Título:</label>
-                            <input type="text" id="titulo" name="titulo" required>
-
-                            <label for="descricao">Descrição:</label>
-                            <textarea id="descricao" name="descricao" required></textarea>
-
-                            <label for="endereco">Endereço:</label>
-                            <input type="text" id="endereco" name="endereco" required>
-
-                            <label for="img_tarefas">Imagens da Tarefa:</label>
-                            <input type="file" id="img_tarefas" name="img_tarefas" multiple>
-
-                            <label for="duracao_estimada">Duração Estimada:</label>
-                            <input type="datetime-local" id="duracao_estimada" name="duracao_estimada" required>
-
-                            <label for="materiais_necessarios">Materiais Necessários:</label>
-                            <input type="text" id="materiais_necessarios" name="materiais_necessarios" required>
-
-                            <label for="qnt_voluntarios_necessarios">Quantidade de Voluntários Necessários:</label>
-                            <input type="number" id="qnt_voluntarios_necessarios" name="qnt_voluntarios_necessarios" required>
-
-                            <label for="observacoes">Observações:</label>
-                            <textarea id="observacoes" name="observacoes"></textarea>
-
-                            <button type="submit" class="btnSubmit">Criar Tarefa</button>
-                        </form>
+                <div class="Tarefas">
+                    <div class="novaTarefaContainer">
+                        <button id="btnNovaTarefa" class="btnAdicionarTarefa">
+                            <img src="/backend/src/public/img_botao.png" alt="Botão adicionar tarefa">
+                            <h2>Adicionar Tarefa</h2>
+                        </button>
+                    </div>
+                    
+                    <div id="listaTarefas" class="cardContainer">
+                        <!-- As novas tarefas aparecerão aqui -->
+                    </div>
+                    
+                    <div class="overlay" id="overlayForm">
+                        <div id="formTarefa">
+                            <button id="fecharModal"> X </button>
+                            <h2>Criar Nova Tarefa</h2>
+                            <form id="novaTarefaForm" enctype="multipart/form-data">
+                                <label for="titulo">Título:</label>
+                                <input type="text" id="titulo" name="titulo" required>
+    
+                                <label for="descricao">Descrição:</label>
+                                <textarea id="descricao" name="descricao" required></textarea>
+    
+                                <label for="endereco">Endereço:</label>
+                                <input type="text" id="endereco" name="endereco" required>
+    
+                                <label for="img_tarefas">Imagens da Tarefa:</label>
+                                <input type="file" id="img_tarefas" name="img_tarefas" multiple>
+    
+                                <label for="duracao_estimada">Duração Estimada:</label>
+                                <input type="datetime-local" id="duracao_estimada" name="duracao_estimada" required>
+    
+                                <label for="materiais_necessarios">Materiais Necessários:</label>
+                                <input type="text" id="materiais_necessarios" name="materiais_necessarios" required>
+    
+                                <label for="qnt_voluntarios_necessarios">Quantidade de Voluntários Necessários:</label>
+                                <input type="number" id="qnt_voluntarios_necessarios" name="qnt_voluntarios_necessarios" required>
+    
+                                <label for="observacoes">Observações:</label>
+                                <textarea id="observacoes" name="observacoes"></textarea>
+    
+                                <button type="submit" class="btnSubmit">Criar Tarefa</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -44,7 +44,7 @@ CREATE TABLE tarefas_plataforma (
     tipo_criador ENUM('voluntario', 'instituicao') NOT NULL
 );
 
-create table tarefas_ids (
+CREATE TABLE tarefas_ids (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_tarefa INT NOT NULL,
 	id_criador_cpf VARCHAR(255) NULL,
@@ -56,11 +56,12 @@ create table tarefas_ids (
 CREATE TABLE participantes (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     tarefaId INT NOT NULL,
-    usuario_id VARCHAR(255),
+    cpf VARCHAR(255),
+    cnpj VARCHAR(255),
     tipo_usuario ENUM('voluntario', 'instituicao') NOT NULL,
     FOREIGN KEY (tarefaId) REFERENCES tarefas_plataforma(id) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
+    FOREIGN KEY (cpf) REFERENCES usuarios_voluntarios(usuario_cpf) ON DELETE CASCADE,
+    FOREIGN KEY (cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
 CREATE TABLE postagens_plataforma (

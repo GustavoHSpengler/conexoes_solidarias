@@ -6,10 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
         console.log(user);
-        // if (user.usuario_cpf) {
-        //     const imgElement = document.getElementById("imagemUsuario");
-        //     imgElement.src = `http://localhost:3005/${user.img_conta}`;
-        // } 
+        
+        if (user.img_conta) {
+
+            const imgElement = document.getElementById("imagemUsuario");
+            const imgUrl = `../../backend/${user.img_conta}`;
+            console.log(`Carregando imagem: ${imgUrl}`);
+            imgElement.src = imgUrl;
+        } else if (user.img_logo) {
+            const imgElement = document.getElementById("imagemUsuario");
+            const imgUrl = `../../${user.img_logo}`;  
+            console.log(`Carregando logo: ${imgUrl}`);
+            imgElement.src = imgUrl;
+        }        
     } else {
         window.location.href = "../Login/login.html";
     }
@@ -114,23 +123,24 @@ async function getCards() {
             if (tarefa.img_tarefas) {
                 const imagens = JSON.parse(tarefa.img_tarefas);
                 imagens.forEach((imgSrc, index) => {
-                    imgHTML += `<img src="${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
+                    imgHTML += `<img src="../../backend/${imgSrc}" alt="Imagem da tarefa ${index + 1}">`;
                 });
             }
 
             card.innerHTML = `
-                <h3>${tarefa.titulo}</h3>
-                ${imgHTML}
-                <p>${tarefa.descricao}</p>
-                <button class="expandir">Expandir</button>
-                <div class="detalhesTarefa" style="display: none;">
-                    <p>Endereço: ${tarefa.endereco}</p>
-                    <p>Duração Estimada: ${tarefa.duracao_estimada}</p>
-                    <p>Materiais Necessários: ${tarefa.materiais_necessarios}</p>
-                    <p>Voluntários Necessários: ${tarefa.qnt_voluntarios_necessarios}</p>
-                    <p>Observações: ${tarefa.observacoes}</p>
-                    <button class="Participar" data-id="${tarefa.id}">Participar</button>
-                </div>
+                <button class="expandir">
+                    <h3>${tarefa.titulo}</h3>
+                    ${imgHTML}
+                    <p>${tarefa.descricao}</p>
+                    <div class="detalhesTarefa" style="display: none;">
+                        <p>Endereço: ${tarefa.endereco}</p>
+                        <p>Duração Estimada: ${tarefa.duracao_estimada}</p>
+                        <p>Materiais Necessários: ${tarefa.materiais_necessarios}</p>
+                        <p>Voluntários Necessários: ${tarefa.qnt_voluntarios_necessarios}</p>
+                        <p>Observações: ${tarefa.observacoes}</p>
+                        <button class="Participar" data-id="${tarefa.id}">Participar</button>
+                    </div>
+                </button>
             `;
 
             document.getElementById("listaTarefas").appendChild(card);

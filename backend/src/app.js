@@ -12,7 +12,7 @@ const taskRouter = require("./routes/tasksRouter");
 app.set("port", process.env.PORT || 3306);
 app.use(express.json());
 const path = require('path')
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'src', 'public')));
 app.use(cors());
 
 
