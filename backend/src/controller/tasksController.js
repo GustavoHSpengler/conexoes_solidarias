@@ -61,28 +61,25 @@ async function storeTasks(request, response) {
 }
 
 async function getTasks(req, res) {
-    const { tarefaId } = req.params; // Captura o ID da tarefa dos parâmetros da requisição
+    const { tarefaId } = req.params; 
     try {
-        // Se tarefaId estiver presente, busque apenas a tarefa específica
         const query = tarefaId 
             ? 'SELECT * FROM tarefas_plataforma WHERE id = ?' 
-            : 'SELECT * FROM tarefas_plataforma'; // Caso contrário, busque todas as tarefas
+            : 'SELECT * FROM tarefas_plataforma'; 
 
         connection.query(
             query,
-            tarefaId ? [tarefaId] : [], // Passa o ID como parâmetro apenas se estiver presente
+            tarefaId ? [tarefaId] : [],
             (error, results) => {
                 if (error) {
                     console.error(error);
                     return res.status(500).json({ message: 'Erro ao recuperar a tarefa.' });
                 }
 
-                // Se não houver resultados, retorne 404 (apenas se buscando por tarefaId)
                 if (tarefaId && results.length === 0) {
                     return res.status(404).json({ message: 'Tarefa não encontrada.' });
                 }
 
-                // Retorne todas as tarefas se não houver tarefaId, ou apenas a tarefa específica
                 res.status(200).json(results);
             }
         );
@@ -92,13 +89,12 @@ async function getTasks(req, res) {
     }
 }
 
-
 async function joinTasks(req, res) {
-  const { tarefaId } = req.params;
+  const tarefaId = req.params.tarefaId;
   const { usuario_id, tipo_usuario } = req.body; 
   try {
       connection.query(
-          'SELECT qnt_voluntarios_necessarios, criador_id, tipo_criador FROM tarefas_plataforma WHERE id = ?',
+          'SELECT qnt_voluntarios_necessarios, tipo_criador FROM tarefas_plataforma WHERE id = ?',
           [tarefaId],
           async (error, tarefa) => {
               if (error) {

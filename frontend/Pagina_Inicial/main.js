@@ -113,8 +113,9 @@ async function getCards() {
         const data = await response.json();
         console.log(data);
 
-        const tarefas = Array.isArray(data) ? data : [data]; 
+        const tarefas = Array.isArray(data) ? data : [data];
         console.log(tarefas);
+
         tarefas.forEach(tarefa => {
             const card = document.createElement("div");
             card.classList.add("cardTarefa");
@@ -127,11 +128,20 @@ async function getCards() {
                 });
             }
 
+            let creatorName = 'Desconhecido';
+            if (tarefa.tipo_criador === 'voluntario' && tarefa.criador_nome) {
+                creatorName = tarefa.criador_nome;
+            } else if (tarefa.tipo_criador === 'instituicao' && tarefa.criador_nome) {
+                creatorName = tarefa.criador_nome;
+            }
+
+            // Add task card HTML
             card.innerHTML = `
                 <button class="expandir">
                     <h3>${tarefa.titulo}</h3>
                     ${imgHTML}
                     <p>${tarefa.descricao}</p>
+                    <p><strong>Criador:</strong> ${creatorName}</p> <!-- Display the creator's name here -->
                     <div class="detalhesTarefa" style="display: none;">
                         <p>Endereço: ${tarefa.endereco}</p>
                         <p>Duração Estimada: ${tarefa.duracao_estimada}</p>
@@ -152,7 +162,7 @@ async function getCards() {
 
             card.querySelector('.Participar').addEventListener("click", async function () {
                 const tarefaId = this.getAttribute('data-id');
-                const userData = JSON.parse(localStorage.getItem("userData")); 
+                const userData = JSON.parse(localStorage.getItem("userData"));
 
                 const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
                     method: "POST",
