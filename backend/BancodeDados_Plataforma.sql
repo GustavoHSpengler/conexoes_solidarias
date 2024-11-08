@@ -65,11 +65,28 @@ CREATE TABLE participantes (
 );
 
 CREATE TABLE postagens_plataforma (
-	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	img_postagem VARCHAR(255) NOT NULL,
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    img_postagem VARCHAR(255) NOT NULL,
     titulo VARCHAR(255) NOT NULL,
-    paragrafo VARCHAR(255) NOT NULL,
-    curtida INT NOT NULL
+    paragrafo TEXT NOT NULL,
+    curtidas INT DEFAULT 0, 
+    usuario_cpf VARCHAR(255),
+    instituicao_cnpj VARCHAR(255),
+    tipo_usuario ENUM('voluntario', 'instituicao') NOT NULL,
+    FOREIGN KEY (usuario_cpf) REFERENCES usuarios_voluntarios(usuario_cpf),
+    FOREIGN KEY (instituicao_cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj)
+);
+
+CREATE TABLE curtidas (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    postagem_id INT NOT NULL,
+    usuario_cpf VARCHAR(255),
+    instituicao_cnpj VARCHAR(255),
+    tipo_usuario ENUM('voluntario', 'instituicao') NOT NULL,
+    data_curtida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (postagem_id) REFERENCES postagens_plataforma(id),
+    FOREIGN KEY (usuario_cpf) REFERENCES usuarios_voluntarios(usuario_cpf),
+    FOREIGN KEY (instituicao_cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj)
 );
 
 CREATE TABLE comentarios (

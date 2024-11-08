@@ -5,18 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userData) {
         const user = JSON.parse(userData);
         document.getElementById("nomeUsuario").textContent = `${user.nome || user.nome_responsavel}`;
-        console.log(user);
-        
-        if (user.img_conta) {
 
+        if (user.img_conta) {
             const imgElement = document.getElementById("imagemUsuario");
             const imgUrl = `../../backend/${user.img_conta}`;
-            console.log(`Carregando imagem: ${imgUrl}`);
             imgElement.src = imgUrl;
         } else if (user.img_logo) {
             const imgElement = document.getElementById("imagemUsuario");
-            const imgUrl = `../../${user.img_logo}`;  
-            console.log(`Carregando logo: ${imgUrl}`);
+            const imgUrl = `../../backend/${user.img_logo}`;
             imgElement.src = imgUrl;
         }        
     } else {
@@ -116,6 +112,8 @@ async function getCards() {
         const tarefas = Array.isArray(data) ? data : [data];
         console.log(tarefas);
 
+        document.getElementById("listaTarefas").innerHTML = '';
+
         tarefas.forEach(tarefa => {
             const card = document.createElement("div");
             card.classList.add("cardTarefa");
@@ -129,19 +127,18 @@ async function getCards() {
             }
 
             let creatorName = 'Desconhecido';
-            if (tarefa.tipo_criador === 'voluntario' && tarefa.criador_nome) {
-                creatorName = tarefa.criador_nome;
-            } else if (tarefa.tipo_criador === 'instituicao' && tarefa.criador_nome) {
-                creatorName = tarefa.criador_nome;
+            if (tarefa.tipo_criador === 'voluntario' && tarefa.id_criador_cpf) {
+                creatorName = tarefa.id_criador_cpf; 
+            } else if (tarefa.tipo_criador === 'instituicao' && tarefa.id_criador_cnpj) {
+                creatorName = tarefa.id_criador_cnpj; 
             }
 
-            // Add task card HTML
             card.innerHTML = `
                 <button class="expandir">
                     <h3>${tarefa.titulo}</h3>
                     ${imgHTML}
                     <p>${tarefa.descricao}</p>
-                    <p><strong>Criador:</strong> ${creatorName}</p> <!-- Display the creator's name here -->
+                    <p><strong>Criador:</strong> ${creatorName}</p>
                     <div class="detalhesTarefa" style="display: none;">
                         <p>Endereço: ${tarefa.endereco}</p>
                         <p>Duração Estimada: ${tarefa.duracao_estimada}</p>
@@ -164,17 +161,30 @@ async function getCards() {
                 const tarefaId = this.getAttribute('data-id');
                 const userData = JSON.parse(localStorage.getItem("userData"));
 
-                const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cpf: userData.usuario_cpf })
-                });
+                if (userData.tipo_usuario !== 'voluntario') {
+                    alert("Apenas voluntários podem participar de tarefas.");
+                    return;
+                }
 
-                const result = await response.json();
-                if (result.success) {
-                    alert("Você se inscreveu na tarefa com sucesso!");
-                } else {
-                    alert("Erro ao se inscrever na tarefa: " + result.message);
+                try {
+                    const response = await fetch(`http://localhost:3005/api/tasks/${tarefaId}/participar`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            usuario_id: userData.usuario_cpf,
+                            tipo_usuario: 'voluntario'
+                        })
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        alert("Você se inscreveu na tarefa com sucesso!");
+                    } else {
+                        alert("Erro ao se inscrever na tarefa: " + result.message);
+                    }
+                } catch (error) {
+                    console.error("Erro ao participar da tarefa: ", error);
+                    alert("Ocorreu um erro ao tentar participar da tarefa.");
                 }
             });
         });

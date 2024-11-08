@@ -90,63 +90,82 @@ async function getTasks(req, res) {
 }
 
 async function joinTasks(req, res) {
-  const tarefaId = req.params.tarefaId;
-  const { usuario_id, tipo_usuario } = req.body; 
-  try {
-      connection.query(
-          'SELECT qnt_voluntarios_necessarios, tipo_criador FROM tarefas_plataforma WHERE id = ?',
-          [tarefaId],
-          async (error, tarefa) => {
-              if (error) {
-                  console.error(error);
-                  return res.status(500).json({ message: 'Erro ao recuperar tarefa.' });
-              }
+    const tarefaId = req.params.tarefaId;
+    const { usuario_id, tipo_usuario } = req.body;
 
-              if (tarefa.length === 0) {
-                  return res.status(404).json({ message: 'Tarefa não encontrada.' });
-              }
+    if (tipo_usuario !== 'voluntario') {
+        return res.status(400).json({ success: false, message: 'Apenas voluntários podem participar de tarefas.' });
+    }
 
-              const criadorId = tarefa[0].criador_id;
-              const tipoCriador = tarefa[0].tipo_criador;
-              const limiteVoluntarios = tarefa[0].qnt_voluntarios_necessarios;
+    try {
+        const tarefaQuery = `
+            SELECT tp.qnt_voluntarios_necessarios, ti.tipo_criador, ti.id_criador_cpf, ti.id_criador_cnpj
+            FROM tarefas_plataforma AS tp
+            JOIN tarefas_ids AS ti ON tp.id = ti.id_tarefa
+            WHERE tp.id = ?
+        `;
 
-              if (criadorId === usuario_id && tipoCriador === tipo_usuario) {
-                  return res.status(400).json({ message: 'Você não pode participar da própria tarefa.' });
-              }
+        connection.query(tarefaQuery, [tarefaId], (error, tarefaResults) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ success: false, message: 'Erro ao recuperar tarefa.' });
+            }
 
-              connection.query(
-                  'SELECT COUNT(*) AS total FROM participantes WHERE tarefaId = ?',
-                  [tarefaId],
-                  async (error, participantes) => {
-                      if (error) {
-                          console.error(error);
-                          return res.status(500).json({ message: 'Erro ao contar participantes.' });
-                      }
+            if (tarefaResults.length === 0) {
+                return res.status(404).json({ success: false, message: 'Tarefa não encontrada.' });
+            }
 
-                      if (participantes[0].total >= limiteVoluntarios) {
-                          return res.status(400).json({ message: 'O limite de voluntários já foi atingido.' });
-                      }
+            const tarefa = tarefaResults[0];
+            const { tipo_criador, id_criador_cpf, id_criador_cnpj, qnt_voluntarios_necessarios } = tarefa;
 
-                      connection.query(
-                          'INSERT INTO participantes (tarefaId, usuario_id, tipo_usuario) VALUES (?, ?, ?)',
-                          [tarefaId, usuario_id, tipo_usuario],
-                          (error) => {
-                              if (error) {
-                                  console.error(error);
-                                  return res.status(500).json({ message: 'Erro ao adicionar participação.' });
-                              }
+            let criadorId = null;
+            if (tipo_criador === 'voluntario') {
+                criadorId = id_criador_cpf;
+            } else if (tipo_criador === 'instituicao') {
+                criadorId = id_criador_cnpj;
+            }
 
-                              return res.status(201).json({ message: 'Participação realizada com sucesso!' });
-                          }
-                      );
-                  }
-              );
-          }
-      );
-  } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Erro ao participar da tarefa.' });
-  }
+            if ((tipo_criador === 'voluntario' && criadorId === usuario_id) ||
+                (tipo_criador === 'instituicao' && criadorId === usuario_id)) {
+                return res.status(400).json({ success: false, message: 'Você não pode participar da própria tarefa.' });
+            }
+
+            const contarParticipantesQuery = `
+                SELECT COUNT(*) AS total 
+                FROM participantes 
+                WHERE tarefaId = ?
+            `;
+
+            connection.query(contarParticipantesQuery, [tarefaId], (error, countResults) => {
+                if (error) {
+                    console.error(error);
+                    return res.status(500).json({ success: false, message: 'Erro ao contar participantes.' });
+                }
+
+                const totalParticipantes = countResults[0].total;
+                if (totalParticipantes >= qnt_voluntarios_necessarios) {
+                    return res.status(400).json({ success: false, message: 'O limite de voluntários já foi atingido.' });
+                }
+
+                const inserirParticipanteQuery = `
+                    INSERT INTO participantes (tarefaId, cpf, tipo_usuario)
+                    VALUES (?, ?, ?)
+                `;
+
+                connection.query(inserirParticipanteQuery, [tarefaId, usuario_id, tipo_usuario], (error) => {
+                    if (error) {
+                        console.error(error);
+                        return res.status(500).json({ success: false, message: 'Erro ao adicionar participação.' });
+                    }
+
+                    return res.status(201).json({ success: true, message: 'Participação realizada com sucesso!' });
+                });
+            });
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Erro ao participar da tarefa.' });
+    }
 }
 
 module.exports = {

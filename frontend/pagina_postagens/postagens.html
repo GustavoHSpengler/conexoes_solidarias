@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/backend/src/public/logo.png.png" type="image/x-icon">
+    <link rel="stylesheet" href="/frontend/Pagina_Postagens/style.css">
+    <title> Conexões Solídarias - Pagína Inicial </title>
+</head>
+<body>
+    <header> 
+        <nav>
+            <div class="logo">
+                <img src="/backend/src/public/logo.png.png" alt="logo do site">
+                <h2> Conexões Solídarias </h2>
+            </div> 
+            <div class="paginas">
+                <p> <a href="/frontend/Pagina_Inicial/pagina_inicial.html"> Pagína Inicial </a> </p>
+                <p> <a href="#"> <b> Postagens </b> </a> </p>
+                <p> <a href="/frontend/Pagina_Conversas/conversas.html"> Chat </a> </p>
+                <p> <a href="/frontend/Pagina_Comentarios/comentarios.html"> Feedback </a> </p>
+            </div>
+            <div class="conta_usuario">
+                <img id="imagemUsuario" src="" alt="imagem do usuário">
+                <h2 id="nomeUsuario"> Usuário </h2>
+            </div>            
+        </nav>
+    </header>
+    <main>
+        <button id="createPostBtn"> 
+            <img src="/backend/src/public/img_botao.png" alt="Botão para adicionar postagens">
+            <h1> Criar postagens </h1> 
+        </button>
+
+    <div id="postContainer">
+        <!-- Aqui as postagens serão adicionadas dinamicamente -->
+    </div>
+
+    <!-- Modal de criação de postagem -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Nova Postagem</h3>
+            <input type="text" id="postTitle" placeholder="Título">
+            <textarea id="postMessage" placeholder="Escreva sua mensagem"></textarea>
+            <input type="file" id="postImage" accept="image/*">
+            <button onclick="addPost()">Publicar</button>
+        </div>
+    </div>    
+    </main>
+    <script src="main.js"></script>
+</body>
