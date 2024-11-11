@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/backend/src/public/logo.png.png" type="image/x-icon">
-    <link rel="stylesheet" href="/frontend/Pagina_Inicial/style.css">
+    <link rel="stylesheet" href="/frontend/Pagina_Conversas/style.css">
     <title> Conexões Solídarias - Pagína Inicial </title>
 </head>
 <body>
@@ -18,7 +18,6 @@
                 <p> <a href="/frontend/Pagina_Inicial/pagina_inicial.html"> Pagína Inicial </a> </p>
                 <p> <a href="/frontend/Pagina_Postagens/postagens.html"> Postagens </a> </p>
                 <p> <a href="#"> <b> Chat </b> </a> </p>
-                <p> <a href="/frontend/Pagina_Comentarios/comentarios.html"> Feedback </a> </p>
             </div>
             <div class="conta_usuario">
                 <img id="imagemUsuario" src="" alt="imagem do usuário">
@@ -26,7 +25,26 @@
             </div>            
         </nav>
     </header>
-    <main> </main>
-    <footer></footer>
+    <main> 
+        <div class="chat-container">
+            <div class="sidebar">
+                <button class="new-chat" onclick="openUserList()">Criar chat...</button>
+                <div class="chat-list" id="chatList"></div>
+            </div>
+            <div class="chat-window">
+                <div class="chat-header">
+                    <span id="chatTitle">Bem-vindo ao Chat!</span>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <!-- As mensagens serão inseridas aqui dinamicamente -->
+                </div>
+                <div class="message-input">
+                    <input type="text" id="messageInput" placeholder="Escreva a sua mensagem...">
+                    <button onclick="sendMessage()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script src="main.js"></script>
 </body>

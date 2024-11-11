@@ -101,8 +101,20 @@ CREATE TABLE comentarios (
     FOREIGN KEY (cnpj) REFERENCES usuarios_instituicoes(instituicao_cnpj) ON DELETE CASCADE
 );
 
+CREATE TABLE chats_plataforma (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_origem VARCHAR(255) NOT NULL,
+    usuario_destino VARCHAR(255) NOT NULL,
+    tipo_destino ENUM('voluntario', 'instituicao') NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE mensagens_plataforma (
-	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_chat INT NOT NULL,
     paragrafo VARCHAR(255) NOT NULL,
-    img_mensagem VARCHAR(255) NOT NULL
+    img_mensagem VARCHAR(255),
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status_mensagem ENUM('lido', 'nao_lido') DEFAULT 'nao_lido',
+    FOREIGN KEY (id_chat) REFERENCES chats_plataforma(id)
 );

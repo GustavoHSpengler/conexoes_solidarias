@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
     const userData = localStorage.getItem('userData');
     if (userData) {
         const user = JSON.parse(userData);
@@ -17,3 +18,35 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../Login/login.html";
     }
 });
+
+document.getElementById("sendButton").addEventListener("click", sendMessage);
+
+function sendMessage() {
+    const messageInput = document.getElementById("messageInput");
+    const messageText = messageInput.value.trim();
+
+    if (messageText) {
+        addMessage(messageText, "sent"); 
+
+        
+        setTimeout(() => {
+            addMessage("Oi", "received");
+        }, 500);
+
+        messageInput.value = ""; 
+    }
+}
+
+function addMessage(text, type) {
+    const messageContainer = document.createElement("div");
+    messageContainer.classList.add("message", type);
+    messageContainer.textContent = text;
+
+    const chatMessages = document.getElementById("chatMessages");
+    chatMessages.appendChild(messageContainer);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function createChat() {
+
+}

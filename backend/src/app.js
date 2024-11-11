@@ -9,7 +9,7 @@ const routerInstitutions = require("./routes/registerRouter-institutions");
 const loginRouter = require("./routes/loginRouter");
 const taskRouter = require("./routes/tasksRouter");
 
-app.set("port", process.env.PORT || 3306);
+app.set("port", process.env.PORT || 3006);
 app.use(express.json());
 const path = require('path')
 app.use(express.static(path.join(__dirname, 'src', 'public')));
